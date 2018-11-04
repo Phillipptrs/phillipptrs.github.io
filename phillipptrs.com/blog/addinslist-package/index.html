@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/blog/addinslist-package/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>addinslist package: An RStudio addin to discover and install RStudio addins</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="RStudio addins were released in early 2016 to provide anyone with the ability to add “extensions” to RStudio. This feature has quickly become popular, but discoverability was a problem: there was just no easy way to know what addins exist. To address that issue, one month ago I created a...">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="addinslist package: An RStudio addin to discover and install RStudio addins" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="../../img/deanimg.jpg" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="addinslist package: An RStudio addin to discover and install RStudio addins" />
+  <meta name="twitter:description" content="RStudio addins were released in early 2016 to provide anyone with the ability to add “extensions” to RStudio. This feature has quickly become popular, but discoverability was a problem: there was just no easy way to know what addins exist. To address that issue, one month ago I created a..." />
+  
+  <meta name="twitter:image" content="../../img/deanimg.jpg" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../../index.html">
+	      <img class="avatar-img" src="../../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>addinslist package: An RStudio addin to discover and install RStudio addins</h1>
+		  
+		  
+		  
+		    <span class="post-meta">
+                      Posted on May 9, 2016
+                       
+                    </span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+      
+        
+        
+        
+      
+        <div id="header-gh-btns">
+          
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=addinslist&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=addinslist&amp;type=watch&amp;v=2&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;type=follow&amp;count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              
+            
+          
+        </div>
+      
+     
+      <article role="main" class="blog-post">
+        
+  
+    <div id="deancarbonads">
+      <script async type="text/javascript" src="http://cdn.carbonads.com/carbon.js?serve=CKYIL5Q7&amp;placement=deanattalicom" id="_carbonads_js"></script>
+    </div>
+  
+
+
+      	<p><a href="https://rstudio.github.io/rstudioaddins/">RStudio addins</a> were released in early 2016 to provide anyone with the ability to add “extensions” to RStudio. This feature has quickly become popular, but discoverability was a problem: there was just no easy way to know what addins exist.</p>
+
+<p>To address that issue, one month ago I created a <a href="https://github.com/daattali/addinslist#addinslist-table">GitHub repo with a list of RStudio addins</a> that was meant to serve as a resource for discovering (and showcasing) RStudio addins. This repo received a lot of feedback, mainly around the idea of developing it into a package that would allow users to browse the addins and install the ones they find interesting. So that’s what I did. The package is called <code class="highlighter-rouge">addinslist</code>.</p>
+
+<p>If you install the <code class="highlighter-rouge">addinslist</code> package (with the command <code class="highlighter-rouge">install.packages("addinslist")</code>), your RStudio will gain a new addin in the <em>Addins</em> menu called <em>Browse RStudio addins</em>. The screenshot below shows how to access this addin.</p>
+
+<p><a href="https://raw.githubusercontent.com/daattali/addinslist/master/inst/media/addins-menu.png"><img src="https://raw.githubusercontent.com/daattali/addinslist/master/inst/media/addins-menu.png" alt="Addins menu" /></a></p>
+
+<p>Running this addin will show you a nice table with information about different available addins. This list automatically fetches new information once a day, so you don’t need to update the package in order to see new addins that have been added since you installed the package.  You can click on any row in the table to install the package that contains that addin. If a row is green, it means you already have that addin (clicking it will <em>uninstall</em> the corresponding package). This is how the addin browser/installer looks:</p>
+
+<p><a href="https://raw.githubusercontent.com/daattali/addinslist/master/inst/media/addin.png"><img src="https://raw.githubusercontent.com/daattali/addinslist/master/inst/media/addin.png" alt="addinslist addin" /></a></p>
+
+<p>If you want to add an addin to this list, feel free to make a pull request <a href="https://github.com/daattali/addinslist">on GitHub</a>.</p>
+
+<p>I should mention that <a href="https://github.com/csgillespie">Colin Gillespie</a> actually thought of this idea first and created <a href="https://github.com/csgillespie/addinmanager">a similar addin</a>, but unfortunately I was not aware of it until after my work was done.</p>
+
+      </article>
+      
+      
+        <div class="blog-tags">
+          Tags:
+          
+            
+              <a href="../../tags/index.html#professional">professional</a>
+            
+              <a href="../../tags/index.html#rstats">rstats</a>
+            
+              <a href="../../tags/index.html#r-bloggers">r-bloggers</a>
+            
+              <a href="../../tags/index.html#packages">packages</a>
+            
+              <a href="../../tags/index.html#shiny">shiny</a>
+            
+          
+        </div>
+      
+
+      
+  <div class="share-section">
+    <h1 class="share-title">Liked what you read?</h1>
+    
+    
+      <div class="share-buttons">
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        <a href="../../contact/index.html" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/addinslist-package/">
+          Let me know
+        </a>
+        <!--
+        <a href="https://www.facebook.com/dialog/feed?app_id=536330676521989&link=https://deanattali.com/blog/addinslist-package/&name=addinslist package: An RStudio addin to discover and install RStudio addins&caption=deanattali.com&redirect_uri=https://deanattali.com/blog/addinslist-package/?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/addinslist-package/">
+          Share on Facebook
+        </a>
+        -->
+        <a href="https://www.paypal.me/daattali/10" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="/blog/addinslist-package/">
+          Support me
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://deanattali.com/blog/addinslist-package/&amp;via=daattali&amp;hashtags=rstats&amp;text=addinslist%20package:%20An%20RStudio%20addin%20to%20discover%20and%20install%20RStudio%20addins" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/addinslist-package/">
+          Tweet it
+        </a>
+      </div>
+    
+    
+    
+      <!-- MailChimp Signup Form -->
+      <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-share">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-share">
+      	      <label for="mce-EMAIL-share">Sign up to my Shiny newsletter</label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-share" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-share" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+
+  </div>
+
+
+      
+      
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="../shiny-game-lightsout/index.html" data-toggle="tooltip" data-placement="top" title="Need any more reason to love R-Shiny? Here: you can even use Shiny to create simple games!">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="../visualize-git-commits-time/index.html" data-toggle="tooltip" data-placement="top" title="Visualizing when I'm most productive during the day">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'deanattali-site';
+	    // ensure that pages with query string or anchor get the same discussion
+            var url_parts = window.location.href.split("?");
+            url_parts = url_parts[0].split("#");
+            disqus_url = url_parts[0];
+            disqus_url = disqus_url.replace(/(\/)*$/, "/"); // make sure the URL ends with one slash
+            disqus_url = disqus_url.replace(/https:\/\//, "http:\/\/"); // make sure new https pages use same comments as old http site
+            
+            // Jekyll 3 caused so many bugs, I'm tired of fixing them one by one properly, so I'll just hack it...
+            // https://github.com/jekyll/jekyll/issues/4483
+            // The projects page now has a trailing slash, it didn't used to
+            if (disqus_url.substr(-9) == "projects/index.html") {
+            	disqus_url = disqus_url.substr(0, disqus_url.length - 1);
+            }
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+      
+      <div id="scroll-box">
+  <div id="scroll-box-close">&times;</div>
+  <div id="scroll-box-hire">
+    Need Shiny help?
+    <a href="../../shiny/index.html">Hire me!</a>
+  </div>
+  <div id="mailchimp-subscribe-section-scrollbox" class="mailchimp-subscribe-section">
+    <div id="mc_embed_signup-scrollbox">
+      <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-scrollbox" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+        <div id="mc_embed_signup_scroll-scrollbox">
+  	      <label for="mce-EMAIL-scrollbox">Sign up to my Shiny newsletter</label>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+  	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-scrollbox" placeholder="Email" required="">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-scrollbox" class="button" title="Sign up to my Shiny newsletter">
+              </div>
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="scroll-box-contact">
+    Questions/comments?
+    <a href="../../contact/index.html">Contact me!</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../../cdn-cgi/l/email-protection.html#fa9e9f9b94ba9b8e8e9b96938e9f9992d4999597c5898f98909f998ec7b29f969695da9c889597da9e9f9b949b8e8e9b9693d4999597" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../../cdn-cgi/l/email-protection.html#b0d4d5d1def0d1c4c4d1dcd9c4d5d3d89ed3dfdd8fc3c5d2dad5d3c48df8d5dcdcdf90d6c2dfdd90d4d5d1ded1c4c4d1dcd99ed3dfdd"><span class="__cf_email__" data-cfemail="7a1e1f1b143a1b0e0e1b16130e1f191254191517">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../../js/bootstrap.min.js"></script>
+  
+	<script src="../../js/js.cookie.js"></script>
+  
+	<script src="../../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+     
+      <!-- AddThis plugin (floating social media sharing buttons on the left of each post) -->
+      <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57d65a4d97789dd1"></script>
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/blog/addinslist-package/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:55 GMT -->
+</html>

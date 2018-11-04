@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/blog/mutate-non-vectorized/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:18:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>How to use dplyr's mutate in R without a vectorized function</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="If you’re reading this, you’ve either encountered this problem before, or you just got to this article out of curiosity (in which case you probably don’t know what problem I’m talking about). A few days ago I was given code by a client for a function that, given a path...">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="How to use dplyr's mutate in R without a vectorized function" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="../../img/deanimg.jpg" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="How to use dplyr's mutate in R without a vectorized function" />
+  <meta name="twitter:description" content="If you’re reading this, you’ve either encountered this problem before, or you just got to this article out of curiosity (in which case you probably don’t know what problem I’m talking about). A few days ago I was given code by a client for a function that, given a path..." />
+  
+  <meta name="twitter:image" content="../../img/deanimg.jpg" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../../index.html">
+	      <img class="avatar-img" src="../../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>How to use dplyr's mutate in R without a vectorized function</h1>
+		  
+		  
+		  
+		    <span class="post-meta">
+                      Posted on April 9, 2018
+                       
+                    </span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+      
+     
+      <article role="main" class="blog-post">
+        
+  
+    <div id="deancarbonads">
+      <script async type="text/javascript" src="http://cdn.carbonads.com/carbon.js?serve=CKYIL5Q7&amp;placement=deanattalicom" id="_carbonads_js"></script>
+    </div>
+  
+
+
+      	<p>If you’re reading this, you’ve either encountered this problem before, or you just got to this article out of curiosity (in which case you probably don’t know what problem I’m talking about).</p>
+
+<p>A few days ago I was given code by a client for a function that, given a path to a patient’s file, generates a useful ID for the patient. I won’t post the actual function, but it was something along the lines of this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="n">patient_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">path_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">str_split</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="s2">"/"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unlist</span><span class="p">()</span><span class="w">
+  </span><span class="n">paste</span><span class="p">(</span><span class="n">path_list</span><span class="p">[</span><span class="nf">length</span><span class="p">(</span><span class="n">path_list</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">path_list</span><span class="p">[</span><span class="nf">length</span><span class="p">(</span><span class="n">path_list</span><span class="p">)],</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"_"</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Given a path <code class="highlighter-rouge">some/path/abc/001.txt</code>, this function will return <code class="highlighter-rouge">abc_001.txt</code>. So far, so good. <strong>(There are better ways to implement this function, but that’s not the point here).</strong></p>
+
+<p>I had a dataframe with file paths as a column, and I needed to add this ID as another column. Normally, this would be easily achieved with a simple <code class="highlighter-rouge">mutate()</code> (from <code class="highlighter-rouge">dplyr</code>):</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"some/path/abc/001.txt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"another/directory/xyz/002.txt"</span><span class="p">),</span><span class="w">
+                 </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">patient_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">patient_name</span><span class="p">(</span><span class="n">path</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This code does run, but it’s not correct. Here’s the output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                           path patient_name
+1         some/path/abc/001.txt  xyz_002.txt
+2 another/directory/xyz/002.txt  xyz_002.txt
+</code></pre></div></div>
+
+<p>You can see the result is incorrect, and it’s because <code class="highlighter-rouge">patient_name()</code> is not a vectorized function - it assumes that its input is just a single path, and doesn’t know how to properly work when given multiple paths.</p>
+
+<p>Usually when I write my own code, I try to make my functions vectorized, so that you can call them with both a single element or with a vector. But in this case, I wasn’t allowed to modify the code to make the function vectorized. So how do we easily vectorize <code class="highlighter-rouge">patient_name()</code> without modifying its code? We can use the <code class="highlighter-rouge">Vectorize()</code> function!</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patient_name_v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Vectorize</span><span class="p">(</span><span class="n">patient_name</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">patient_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">patient_name_v</span><span class="p">(</span><span class="n">path</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This actually gives us the correct result:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                           path patient_name
+1         some/path/abc/001.txt  abc_001.txt
+2 another/directory/xyz/002.txt  xyz_002.txt
+</code></pre></div></div>
+
+<p>This is only one usecase of the <code class="highlighter-rouge">Vectorize()</code> function. It can come in handy whenever you need to vectorize a non-vectorized function.</p>
+
+<p>For example, it seems that the <code class="highlighter-rouge">nrow()</code> function is not vectorized, because if I try to create a list with two dataframes in it and get the number of rows, I get <code class="highlighter-rouge">NULL</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dflist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">)</span><span class="w">
+</span><span class="n">nrow</span><span class="p">(</span><span class="n">dflist</span><span class="p">)</span><span class="w">
+</span><span class="c1"># NULL</span><span class="w">
+</span></code></pre></div></div>
+
+<p>I hypothesized that vectorizing it will do the trick, and it indeed seems to work!</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Vectorize</span><span class="p">(</span><span class="n">nrow</span><span class="p">))(</span><span class="n">dflist</span><span class="p">)</span><span class="w">
+</span><span class="c1"># [1]  32 150</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>It should be made clear that writing your function in a vectorized form to avoid this problem altogether would be the ideal solution.</strong></p>
+
+<p><strong>UPDATE:</strong> As is usually the case with useful R functions, there are other packages that have functions to achieve similar things that may be more efficient and flexible for different situations. You should read Jim Hester’s <a href="http://www.jimhester.com/2018/04/12/vectorize/">followup</a> on why using <code class="highlighter-rouge">purrr</code> functions is safer than this base R function. If you do want to use only base R functions and use <code class="highlighter-rouge">Vectorize()</code>, it’s a good idea to read its documentation and take note of its two parameters <code class="highlighter-rouge">SIMPLIFY</code> and <code class="highlighter-rouge">USE.NAMES</code> that both default to <code class="highlighter-rouge">TRUE</code>.</p>
+
+      </article>
+      
+      
+        <div class="blog-tags">
+          Tags:
+          
+            
+              <a href="../../tags/index.html#professional">professional</a>
+            
+              <a href="../../tags/index.html#rstats">rstats</a>
+            
+              <a href="../../tags/index.html#r-bloggers">r-bloggers</a>
+            
+              <a href="../../tags/index.html#tutorial">tutorial</a>
+            
+          
+        </div>
+      
+
+      
+  <div class="share-section">
+    <h1 class="share-title">Liked what you read?</h1>
+    
+    
+      <div class="share-buttons">
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        <a href="../../contact/index.html" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/mutate-non-vectorized/">
+          Let me know
+        </a>
+        <!--
+        <a href="https://www.facebook.com/dialog/feed?app_id=536330676521989&link=https://deanattali.com/blog/mutate-non-vectorized/&name=How to use dplyr's mutate in R without a vectorized function&caption=deanattali.com&redirect_uri=https://deanattali.com/blog/mutate-non-vectorized/?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/mutate-non-vectorized/">
+          Share on Facebook
+        </a>
+        -->
+        <a href="https://www.paypal.me/daattali/10" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="/blog/mutate-non-vectorized/">
+          Support me
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://deanattali.com/blog/mutate-non-vectorized/&amp;via=daattali&amp;hashtags=rstats&amp;text=How%20to%20use%20dplyr's%20mutate%20in%20R%20without%20a%20vectorized%20function" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/mutate-non-vectorized/">
+          Tweet it
+        </a>
+      </div>
+    
+    
+    
+      <!-- MailChimp Signup Form -->
+      <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-share">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-share">
+      	      <label for="mce-EMAIL-share">Sign up to my Shiny newsletter</label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-share" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-share" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+
+  </div>
+
+
+      
+      
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="../shiny-use-cases-datacamp-course/index.html" data-toggle="tooltip" data-placement="top" title="Shiny Case Studies: My new online interactive video course">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="../cranalerts/index.html" data-toggle="tooltip" data-placement="top" title="CRANalerts: Get email alerts when a CRAN package gets updated">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'deanattali-site';
+	    // ensure that pages with query string or anchor get the same discussion
+            var url_parts = window.location.href.split("?");
+            url_parts = url_parts[0].split("#");
+            disqus_url = url_parts[0];
+            disqus_url = disqus_url.replace(/(\/)*$/, "/"); // make sure the URL ends with one slash
+            disqus_url = disqus_url.replace(/https:\/\//, "http:\/\/"); // make sure new https pages use same comments as old http site
+            
+            // Jekyll 3 caused so many bugs, I'm tired of fixing them one by one properly, so I'll just hack it...
+            // https://github.com/jekyll/jekyll/issues/4483
+            // The projects page now has a trailing slash, it didn't used to
+            if (disqus_url.substr(-9) == "projects/index.html") {
+            	disqus_url = disqus_url.substr(0, disqus_url.length - 1);
+            }
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+      
+      <div id="scroll-box">
+  <div id="scroll-box-close">&times;</div>
+  <div id="scroll-box-hire">
+    Need Shiny help?
+    <a href="../../shiny/index.html">Hire me!</a>
+  </div>
+  <div id="mailchimp-subscribe-section-scrollbox" class="mailchimp-subscribe-section">
+    <div id="mc_embed_signup-scrollbox">
+      <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-scrollbox" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+        <div id="mc_embed_signup_scroll-scrollbox">
+  	      <label for="mce-EMAIL-scrollbox">Sign up to my Shiny newsletter</label>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+  	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-scrollbox" placeholder="Email" required="">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-scrollbox" class="button" title="Sign up to my Shiny newsletter">
+              </div>
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="scroll-box-contact">
+    Questions/comments?
+    <a href="../../contact/index.html">Contact me!</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../../cdn-cgi/l/email-protection.html#0d69686c634d6c79796c616479686e65236e6260327e786f67686e793045686161622d6b7f62602d69686c636c79796c6164236e6260" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../../cdn-cgi/l/email-protection.html#a4c0c1c5cae4c5d0d0c5c8cdd0c1c7cc8ac7cbc99bd7d1c6cec1c7d099ecc1c8c8cb84c2d6cbc984c0c1c5cac5d0d0c5c8cd8ac7cbc9"><span class="__cf_email__" data-cfemail="147071757a5475606075787d6071777c3a777b79">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../../js/bootstrap.min.js"></script>
+  
+	<script src="../../js/js.cookie.js"></script>
+  
+	<script src="../../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+     
+      <!-- AddThis plugin (floating social media sharing buttons on the left of each post) -->
+      <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57d65a4d97789dd1"></script>
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/blog/mutate-non-vectorized/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:18:59 GMT -->
+</html>

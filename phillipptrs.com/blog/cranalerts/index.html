@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/blog/cranalerts/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:18:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>CRANalerts: Get email alerts when a CRAN package gets updated</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="Have you ever found yourself asking “how can I make sure I don’t miss the next version release of package X”? That’s the exact problem I set out to solve with CRANalerts. Simply provide your email address and an R package name, and every time the package gets updated on...">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="CRANalerts: Get email alerts when a CRAN package gets updated" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="../../img/blog/cranalerts/screenshot.png" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="CRANalerts: Get email alerts when a CRAN package gets updated" />
+  <meta name="twitter:description" content="Have you ever found yourself asking “how can I make sure I don’t miss the next version release of package X”? That’s the exact problem I set out to solve with CRANalerts. Simply provide your email address and an R package name, and every time the package gets updated on..." />
+  
+  <meta name="twitter:image" content="../../img/blog/cranalerts/screenshot.png" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../../index.html">
+	      <img class="avatar-img" src="../../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>CRANalerts: Get email alerts when a CRAN package gets updated</h1>
+		  
+		  
+		  
+		    <span class="post-meta">
+                      Posted on April 11, 2018
+                       
+                    </span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+      
+     
+      <article role="main" class="blog-post">
+        
+  
+    <div id="deancarbonads">
+      <script async type="text/javascript" src="http://cdn.carbonads.com/carbon.js?serve=CKYIL5Q7&amp;placement=deanattalicom" id="_carbonads_js"></script>
+    </div>
+  
+
+
+      	<p>Have you ever found yourself asking “how can I make sure I don’t miss the next version release of package X”?</p>
+
+<p>That’s the exact problem I set out to solve with <a href="https://cranalerts.com/">CRANalerts</a>. Simply provide your email address and an R package name, and every time the package gets updated on CRAN in the future, you’ll get notified.</p>
+
+<div style="text-align:center;">
+  <a class="btn btn-lg btn-success" href="https://cranalerts.com/">Check our CRANalerts</a>
+</div>
+
+<div style="margin-bottom: 25px;"></div>
+
+<div style="text-align:center;">
+  <a href="https://cranalerts.com/">
+    <img src="../../img/blog/cranalerts/screenshot.png" alt="CRANalerts" />
+  </a>
+</div>
+
+<p>It all started in January, when <a href="https://github.com/jimhester">Jim Hester</a> was getting ready to submit a new version of <code class="highlighter-rouge">readr</code> to CRAN. The new version would have broken my code, so Jim submitted a <a href="https://github.com/daattali/ddpcr/pull/21">PR</a> to my package that would ensure my code will still work after the update. I didn’t want to accept the PR until <code class="highlighter-rouge">readr</code> was actually on CRAN, so I just started checking CRAN every few days to see when <code class="highlighter-rouge">readr</code> is updatd already.</p>
+
+<p>Over the next two months, I received the usual emails asking me when various packages of mine are going to be updated on CRAN. This happens often, but I never paid much attention to it. Usually when I got asked “how do I know when shinyjs is updated on CRAN?” my response was “check the page every week”. Yup, very helpful, I know!</p>
+
+<p>But now that this problem became relevant to me, I eventually figured that manually checking a website continually is no good, so I sent out <a href="https://twitter.com/daattali/status/977200184043044864">a tweet</a> asking if there’s any service that will alert me when a CRAN package gets updated. People gave some suggestions, but there was nothing specifically for my purpose. So, since the weekend was coming up and I had a lot of actual work to do, what better way to procrastinate than to build this service? And so that’s exactly what I did last weekend.</p>
+
+<div style="text-align:center;">
+  <a href="https://xkcd.com/1319/">
+    <img src="../../img/blog/cranalerts/automation.png" alt="relevant xkcd" />
+  </a>
+</div>
+
+<p>For those wondering—yes, of course I had to make this a Shiny app. I actually started building it with Node.js initially, but I quickly thought “nah, go Shiny or go home!”. To be honest, I think this is a case where Shiny was not necessarily the absolute best tool for the job, but I did want to see if I could build a decent-ish service with Shiny. And so be it. <a href="https://cranalerts.com/">CRANalerts</a> is fully a Shiny app.</p>
+
+<p>You’ll hopefully agree that this website doesn’t <em>look</em> like a Shiny app. UI/UX is always very important to me; I make sure that whatever I build is not only functional, but looks good and is intuitive and user-friendly. But getting it to look pretty was not a trivial task, here is what CRANalerts looked like after 1 day of work:</p>
+
+<div style="text-align:center;">
+  <a href="https://cranalerts.com/">
+    <img src="../../img/blog/cranalerts/nocss.png" alt="no css" />
+  </a>
+</div>
+
+<p>Beautiful, right? In the everything-is-beautiful-in-its-own-unique-way kind of beautiful. A draft version of CRANalerts was ready after a day, but it actually took me another full day to just come up with a design and implement it to a point where I thought it looked good enough. Literally half the time was spent on coding, and half on making it pretty.</p>
+
+<p>while it is important for me to make my tools look nice, I  also realize it’s not my forte—it doesn’t come quickly or naturally to me, and it ends up taking up a lot more of my time than I would like. <strong>If anyone has a good eye for design and would like to help me on my next projects, I would really appreciate your help, feel free to <a href="../../contact/index.html">send me a message</a>!</strong> (You don’t have to be a graphic designer by profession, I think a lot of people in the R community have much better artistic skills than myself.)</p>
+
+<p>Keep in mind that this entire service was built in a weekend and did not have the resources get properly thoroughly tested, so it’s possible you’ll encounter problems. If you do have any feedback, feel free to let me know. And if you’d like to support my work on this project and future projects (including supporting server costs, AWS fees, maintenance of tools, etc), I appreciate any donations :)</p>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="text-align: center;">
+  <input type="hidden" name="cmd" value="_s-xclick" />
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  " />
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+      </article>
+      
+      
+        <div class="blog-tags">
+          Tags:
+          
+            
+              <a href="../../tags/index.html#professional">professional</a>
+            
+              <a href="../../tags/index.html#rstats">rstats</a>
+            
+              <a href="../../tags/index.html#r-bloggers">r-bloggers</a>
+            
+              <a href="../../tags/index.html#packages">packages</a>
+            
+              <a href="../../tags/index.html#shiny">shiny</a>
+            
+          
+        </div>
+      
+
+      
+  <div class="share-section">
+    <h1 class="share-title">Liked what you read?</h1>
+    
+    
+      <div class="share-buttons">
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        <a href="../../contact/index.html" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/cranalerts/">
+          Let me know
+        </a>
+        <!--
+        <a href="https://www.facebook.com/dialog/feed?app_id=536330676521989&link=https://deanattali.com/blog/cranalerts/&name=CRANalerts: Get email alerts when a CRAN package gets updated&caption=deanattali.com&redirect_uri=https://deanattali.com/blog/cranalerts/?message=Thanks for sharing!&picture=https://deanattali.com/img/blog/cranalerts/screenshot.PNG" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/cranalerts/">
+          Share on Facebook
+        </a>
+        -->
+        <a href="https://www.paypal.me/daattali/10" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="/blog/cranalerts/">
+          Support me
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://deanattali.com/blog/cranalerts/&amp;via=daattali&amp;hashtags=rstats&amp;text=CRANalerts:%20Get%20email%20alerts%20when%20a%20CRAN%20package%20gets%20updated" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/cranalerts/">
+          Tweet it
+        </a>
+      </div>
+    
+    
+    
+      <!-- MailChimp Signup Form -->
+      <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-share">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-share">
+      	      <label for="mce-EMAIL-share">Sign up to my Shiny newsletter</label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-share" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-share" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+
+  </div>
+
+
+      
+      
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="../mutate-non-vectorized/index.html" data-toggle="tooltip" data-placement="top" title="How to use dplyr's mutate in R without a vectorized function">&larr; Previous Post</a>
+          </li>
+        
+        
+      </ul>
+      
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'deanattali-site';
+	    // ensure that pages with query string or anchor get the same discussion
+            var url_parts = window.location.href.split("?");
+            url_parts = url_parts[0].split("#");
+            disqus_url = url_parts[0];
+            disqus_url = disqus_url.replace(/(\/)*$/, "/"); // make sure the URL ends with one slash
+            disqus_url = disqus_url.replace(/https:\/\//, "http:\/\/"); // make sure new https pages use same comments as old http site
+            
+            // Jekyll 3 caused so many bugs, I'm tired of fixing them one by one properly, so I'll just hack it...
+            // https://github.com/jekyll/jekyll/issues/4483
+            // The projects page now has a trailing slash, it didn't used to
+            if (disqus_url.substr(-9) == "projects/index.html") {
+            	disqus_url = disqus_url.substr(0, disqus_url.length - 1);
+            }
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+      
+      <div id="scroll-box">
+  <div id="scroll-box-close">&times;</div>
+  <div id="scroll-box-hire">
+    Need Shiny help?
+    <a href="../../shiny/index.html">Hire me!</a>
+  </div>
+  <div id="mailchimp-subscribe-section-scrollbox" class="mailchimp-subscribe-section">
+    <div id="mc_embed_signup-scrollbox">
+      <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-scrollbox" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+        <div id="mc_embed_signup_scroll-scrollbox">
+  	      <label for="mce-EMAIL-scrollbox">Sign up to my Shiny newsletter</label>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+  	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-scrollbox" placeholder="Email" required="">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-scrollbox" class="button" title="Sign up to my Shiny newsletter">
+              </div>
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="scroll-box-contact">
+    Questions/comments?
+    <a href="../../contact/index.html">Contact me!</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../../cdn-cgi/l/email-protection.html#640001050a2405101005080d1001070c4a070b095b1711060e010710592c0108080b4402160b09440001050a05101005080d4a070b09" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../../cdn-cgi/l/email-protection.html#593d3c383719382d2d3835302d3c3a31773a3634662a2c3b333c3a2d64113c353536793f2b3634793d3c3837382d2d383530773a3634"><span class="__cf_email__" data-cfemail="caaeafaba48aabbebeaba6a3beafa9a2e4a9a5a7">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../../js/bootstrap.min.js"></script>
+  
+	<script src="../../js/js.cookie.js"></script>
+  
+	<script src="../../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+     
+      <!-- AddThis plugin (floating social media sharing buttons on the left of each post) -->
+      <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57d65a4d97789dd1"></script>
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/blog/cranalerts/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:18:57 GMT -->
+</html>

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dean Attali</title>
+    <description>R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com.</description>
+    <link>https://deanattali.com</link>
+    <atom:link href="https://deanattali.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>CRANalerts: Get email alerts when a CRAN package gets updated</title>
+		<description>
+		  
+		  Have you ever found yourself asking “how can I make sure I don’t miss the next version release of package X”? That’s the exact problem I set out to solve with CRANalerts. Simply provide your email address and an R package name, and every time the package gets updated on...
+		</description>
+        <pubDate>Wed, 11 Apr 2018 02:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/cranalerts/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/cranalerts/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>shiny</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>How to use dplyr's mutate in R without a vectorized function</title>
+		<description>
+		  
+		  If you’re reading this, you’ve either encountered this problem before, or you just got to this article out of curiosity (in which case you probably don’t know what problem I’m talking about). A few days ago I was given code by a client for a function that, given a path...
+		</description>
+        <pubDate>Mon, 09 Apr 2018 09:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/mutate-non-vectorized/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/mutate-non-vectorized/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>tutorial</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Shiny Case Studies: My new online interactive video course</title>
+		<description>
+		  
+		  Last week, my brand new DataCamp course Shiny Case Studies was finally released after being in the works for a full year! Check out the course This is an online course consisting of a series of short videos, mulitple choice exercises, and interactive coding exercises. The course is designed to...
+		</description>
+        <pubDate>Mon, 26 Feb 2018 08:20:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/shiny-use-cases-datacamp-course/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/shiny-use-cases-datacamp-course/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>shinyalert: Easily create pretty popup messages (modals) in Shiny</title>
+		<description>
+		  
+		  A brand new shiny package has entered the world yesterday: shinyalert. It does only one thing, but does it well: show a message to the user in a modal (aka popup, dialog, or alert box). Actually, it can do one more thing: shinyalert can also be used to retrieve an...
+		</description>
+        <pubDate>Tue, 13 Feb 2018 08:00:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/shinyalert-package/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/shinyalert-package/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>shiny</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>colourpicker package v1.0: You can now select semi-transparent colours in R (&amp; more!)</title>
+		<description>
+		  
+		  For those who aren’t familiar with the colourpicker package, it provides a colour picker for R that can be used in Shiny, as well as other related tools. Today it’s leaving behind its 0.x days and moving on to version 1.0! colourpicker has gone through a few major milestones since...
+		</description>
+        <pubDate>Mon, 16 Oct 2017 11:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/colourpicker-update-alpha/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/colourpicker-update-alpha/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>What makes an R talk popular? Scraping useR2017 attendance information to find out!</title>
+		<description>
+		  
+		  Click here to explore the data for yourself First off — I’ll admit that was my poor attempt at a click-bait title. But if you’re still reading the next paragraph, that means it was successful! Table of contents Background Am I number 1?! Scraping individual event information from the useR...
+		</description>
+        <pubDate>Wed, 02 Aug 2017 12:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/user2017/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/user2017/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Plot Colour Helper - Finally an easy way to pick colours for your R plots!</title>
+		<description>
+		  
+		  You’ve just made an amazing plot in R, and the only thing remaining is finding the right colours to use. Arghhh this part is never fun… You’re probably familiar with this loop: try some colour values -&amp;gt; plot -&amp;gt; try different colours -&amp;gt; plot -&amp;gt; repeat. Don’t you wish there...
+		</description>
+        <pubDate>Mon, 09 Jan 2017 02:00:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/plot-colour-helper/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/plot-colour-helper/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>packages</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>How to write a useful htmlwidgets in R: tips and walk-through a real example</title>
+		<description>
+		  
+		  I’d like to share some tips and recommendations on building htmlwidgets, based on my own learning experience while creating timevis. These tips are mostly concerned with making your htmlwidget more useful and user friendly. In this post, every tip I provide will be followed by an actual code walk-through so...
+		</description>
+        <pubDate>Tue, 18 Oct 2016 11:05:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/htmlwidgets-tips/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/htmlwidgets-tips/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Shiny tips &amp; tricks for improving your apps and solving common problems</title>
+		<description>
+		  
+		  This document contains a collection of various Shiny tricks that I commonly use or that I know many people ask about. Each link contains a complete functional Shiny app that demonstrates how to perform a non trivial task in Shiny. The complete up-to-date list of tips, along with all the...
+		</description>
+        <pubDate>Mon, 29 Aug 2016 09:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/advanced-shiny-tips/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/advanced-shiny-tips/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		    <category>popular</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Visualizing when I'm most productive during the day</title>
+		<description>
+		  Analyzing my (and others') git activity - 
+		  Click here to explore the data yourself Yesterday I saw this retweet from @timelyportfolio that links to a gist by @gka. The gist gave a few short scripts that can show you when your git commits take place during the day. I thought that was cool, so I took it...
+		</description>
+        <pubDate>Fri, 19 Aug 2016 11:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/visualize-git-commits-time/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/visualize-git-commits-time/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>addinslist package: An RStudio addin to discover and install RStudio addins</title>
+		<description>
+		  
+		  RStudio addins were released in early 2016 to provide anyone with the ability to add “extensions” to RStudio. This feature has quickly become popular, but discoverability was a problem: there was just no easy way to know what addins exist. To address that issue, one month ago I created a...
+		</description>
+        <pubDate>Mon, 09 May 2016 11:20:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/addinslist-package/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/addinslist-package/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>shiny</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Need any more reason to love R-Shiny? Here: you can even use Shiny to create simple games!</title>
+		<description>
+		  
+		  TL;DR Click here to play a puzzle game written entirely in Shiny (source code). Anyone who reads my blog posts knows by now that I’m very enthusiastic about Shiny (the web app framework for R - if you didn’t know what Shiny is then I suggest reading my previous post...
+		</description>
+        <pubDate>Tue, 26 Jan 2016 09:00:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/shiny-game-lightsout/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/shiny-game-lightsout/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>packages</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>ezknitr: R package to avoid the typical working directory pain when using knitr</title>
+		<description>
+		  
+		  A new package has hit the CRAN shelves this week. While knitr is one of the most useful R packages in existence, ezknitr is a simple extension to it that adds flexibility in several ways. One common source of frustration with knitr is that it assumes the directory where the...
+		</description>
+        <pubDate>Wed, 09 Dec 2015 13:30:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/ezknitr-package/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/ezknitr-package/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>knitr</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Building Shiny apps - an interactive tutorial</title>
+		<description>
+		  
+		  If you want tutoring/training in Shiny or need help with building a Shiny app, I’m available for hire. Shiny is a package from RStudio that can be used to build interactive web pages with R. While that may sound scary because of the words “web pages”, it’s geared to R...
+		</description>
+        <pubDate>Mon, 07 Dec 2015 09:00:00 -0800</pubDate>
+        <link>https://deanattali.com/blog/building-shiny-apps-tutorial/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/building-shiny-apps-tutorial/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		    <category>popular</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Persistent data storage in Shiny apps</title>
+		<description>
+		  
+		  This article is also published on RStudio’s Shiny Articles Shiny apps often need to save data, either to load it back into a different session or to simply log some information. However, common methods of storing data from R may not work well with Shiny. Functions like write.csv() and saveRDS()...
+		</description>
+        <pubDate>Wed, 01 Jul 2015 15:00:00 -0700</pubDate>
+        <link>https://deanattali.com/blog/shiny-persistent-data-storage/</link>
+        <guid isPermaLink="true">https://deanattali.com/blog/shiny-persistent-data-storage/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		    <category>popular</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Shiny finally has a colour picker - use colourInput to select colours in Shiny apps</title>
+		<description>
+		  
+		  NOTE: the colour input described here is no longer part of shinyjs and is now available in the colourpicker package instead. I don’t always think Shiny is missing anything, but when I do - I fill in the gap myself. That was meant to be read as The Most Interesting...
+		</description>
+        <pubDate>Sun, 28 Jun 2015 13:00:00 -0700</pubDate>
+        <link>https://deanattali.com/2015/06/28/introducing-shinyjs-colourinput/</link>
+        <guid isPermaLink="true">https://deanattali.com/2015/06/28/introducing-shinyjs-colourinput/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>shinyjs</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Mimicking a Google Form with a Shiny app</title>
+		<description>
+		  
+		  In this post we will walk through the steps required to build a shiny app that mimicks a Google Form. It will allow users to submit responses to some input fields, save their data, and allow admins to view the submitted responses. Like many of my other posts, it may...
+		</description>
+        <pubDate>Sun, 14 Jun 2015 05:30:00 -0700</pubDate>
+        <link>https://deanattali.com/2015/06/14/mimicking-google-form-shiny/</link>
+        <guid isPermaLink="true">https://deanattali.com/2015/06/14/mimicking-google-form-shiny/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>shinyjs</category>
+		  
+		    <category>tutorial</category>
+		  
+		    <category>popular</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>New shinyjs version: Useful tools for any Shiny app developer + easily call JavaScript functions as R code</title>
+		<description>
+		  
+		  About a month ago I made an announcement about the initial release of shinyjs. After some feedback, a few feature requests, and numerous hours of work, I’m excited to say that a new version of shinyjs v0.0.6.2 was made available on CRAN this week. The package’s main objective is to...
+		</description>
+        <pubDate>Sun, 31 May 2015 18:50:00 -0700</pubDate>
+        <link>https://deanattali.com/2015/05/31/shinyjs-extend/</link>
+        <guid isPermaLink="true">https://deanattali.com/2015/05/31/shinyjs-extend/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>packages</category>
+		  
+		    <category>shinyjs</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>Analyzing R-Bloggers' posts via Twitter</title>
+		<description>
+		  
+		  For those who don’t know, every time a new blog post gets added to R-Bloggers, it gets a corresponding tweet by @Rbloggers, which gets seen by Rbloggers’ ~20k followers fairly fast. And every time my post gets published, I can’t help but check up on how many people gave that...
+		</description>
+        <pubDate>Sun, 17 May 2015 23:30:00 -0700</pubDate>
+        <link>https://deanattali.com/2015/05/17/analyzing-rbloggers-posts-via-twitter/</link>
+        <guid isPermaLink="true">https://deanattali.com/2015/05/17/analyzing-rbloggers-posts-via-twitter/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>twitter</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+      <item>
+        <title>How to get your very own RStudio Server and Shiny Server with DigitalOcean</title>
+		<description>
+		  
+		  If you want help setting up your Shiny Server, a 1-on-1 walk-through or tutorial, or just general consultation about using Shiny Server, I’m available for hire. If you’ve always wanted to have an RStudio Server of your own so that you can access R from anywhere, or your own Shiny...
+		</description>
+        <pubDate>Sat, 09 May 2015 21:30:00 -0700</pubDate>
+        <link>https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/</link>
+        <guid isPermaLink="true">https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/</guid>
+		
+		  
+		    <category>professional</category>
+		  
+		    <category>rstats</category>
+		  
+		    <category>r-bloggers</category>
+		  
+		    <category>shiny</category>
+		  
+		    <category>tutorial</category>
+		  
+		    <category>popular</category>
+		  
+		
+		
+		  
+		
+      </item>
+    
+  </channel>
+</rss>

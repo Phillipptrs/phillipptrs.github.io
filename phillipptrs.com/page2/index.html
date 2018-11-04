@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/page2/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>Dean Attali - R-Shiny consultant</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com.">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+    
+      <link rel="stylesheet" href="../css/index.css" />
+    
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Dean Attali - R-Shiny consultant" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="../img/deanimg.jpg" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="Hi, I'm Dean" />
+  <meta name="twitter:description" content="All posts Most Popular Tutorials Index {% include datacamp_course_promo.html %} {% for post in paginator.posts %} {{ post.title }} {% if post.subtitle %} {{ post.subtitle }} {% endif %} Posted on {{ post.date | date: &quot;%B %-d, %Y&quot; }} {{ post.content | truncatewords: 50 | strip_html | xml_escape}} [Read&amp;nbsp;More] {%..." />
+  
+  <meta name="twitter:image" content="../img/deanimg.jpg" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../index.html">
+	      <img class="avatar-img" src="../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+  <div id="header-big-imgs" data-num-img=32
+    
+	  
+	  
+	    
+		  data-img-src-1="../img/big-imgs/costa-rica-house.jpg"
+		  data-img-desc-1="Montezuma, Costa Rica (2011)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-2="../img/big-imgs/grouse-grind.jpg"
+		  data-img-desc-2="Vancouver, Canada (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-3="../img/big-imgs/hawaii1.jpg"
+		  data-img-desc-3="Kauai, HI, USA (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-4="../img/big-imgs/hawaii2.jpg"
+		  data-img-desc-4="Kauai, HI, USA (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-5="../img/big-imgs/hongkong-cliff-dive.jpg"
+		  data-img-desc-5="Hong Kong (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-6="../img/big-imgs/hongkong-infinity-pool.jpg"
+		  data-img-desc-6="Hong Kong (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-7="../img/big-imgs/israel-dive1.jpg"
+		  data-img-desc-7="Eilat, Israel (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-8="../img/big-imgs/israel-dive2.jpg"
+		  data-img-desc-8="Eilat, Israel (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-9="../img/big-imgs/israel-dive3.jpg"
+		  data-img-desc-9="Eilat, Israel (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-10="../img/big-imgs/laos-pond2.jpg"
+		  data-img-desc-10="Luang Prabang, Laos (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-11="../img/big-imgs/laos-pond1.jpg"
+		  data-img-desc-11="Luang Prabang, Laos (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-12="../img/big-imgs/laos-pond3.jpg"
+		  data-img-desc-12="Luang Prabang, Laos (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-13="../img/big-imgs/st-martin.jpg"
+		  data-img-desc-13="St Maarten (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-14="../img/big-imgs/tanzania.jpg"
+		  data-img-desc-14="Mt Kilimanjaro, Tanzania (2012)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-15="../img/big-imgs/vietnam-beach.jpg"
+		  data-img-desc-15="Mui Ne, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-16="../img/big-imgs/vietnam-climb.jpg"
+		  data-img-desc-16="Cat Ba, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-17="../img/big-imgs/vietnam-climb2.jpg"
+		  data-img-desc-17="Cat Ba, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-18="../img/big-imgs/vietnam-dunes.jpg"
+		  data-img-desc-18="Mui Ne, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-19="../img/big-imgs/vietnam-dunes2.jpg"
+		  data-img-desc-19="Mui Ne, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-20="../img/big-imgs/vietnam-fruits.jpg"
+		  data-img-desc-20="Nha Trang, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-21="../img/big-imgs/vietnam-hat.jpg"
+		  data-img-desc-21="Hoi An, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-22="../img/big-imgs/vietnam-jump.jpg"
+		  data-img-desc-22="Mui Ne, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-23="../img/big-imgs/vietnam-ricefield.jpg"
+		  data-img-desc-23="Sapa, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-24="../img/big-imgs/vietnam-scooter.jpg"
+		  data-img-desc-24="Da Nang, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-25="../img/big-imgs/vietnam-walk.jpg"
+		  data-img-desc-25="Sapa, Vietnam (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-26="../img/big-imgs/california-skydive.jpg"
+		  data-img-desc-26="Davis, CA, USA (2008)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-27="../img/big-imgs/california-surf.jpg"
+		  data-img-desc-27="Los Angeles, CA, USA (2008)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-28="../img/big-imgs/california-surf2.jpg"
+		  data-img-desc-28="Los Angeles, CA, USA (2008)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-29="../img/big-imgs/california-surf3.jpg"
+		  data-img-desc-29="Santa Cruz, CA, USA (2009)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-30="../img/big-imgs/costa-rica.jpg"
+		  data-img-desc-30="Arenal, Costa Rica (2011)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-31="../img/big-imgs/rio-hanggliding.jpg"
+		  data-img-desc-31="Rio de Janeiro, Brazil (2015)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-32="../img/big-imgs/hawaii-turtles.jpg"
+		  data-img-desc-32="Oahu, HI, USA (2016)"
+		
+	  
+    
+  ></div>
+
+
+<header class="header-section has-img">
+
+<div class="big-img intro-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Hi, I'm Dean</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">R-Shiny Expert / Software Tool Builder / Extreme Traveller</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class='img-desc'></span>
+</div>
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Hi, I'm Dean</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">R-Shiny Expert / Software Tool Builder / Extreme Traveller</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+
+      <div class="list-filters">
+  <a href="../index.html" class="list-filter filter-selected">All posts</a>
+  <a href="../popular/index.html" class="list-filter">Most Popular</a>
+  <a href="../tutorials/index.html" class="list-filter">Tutorials</a>
+  <a href="../tags/index.html" class="list-filter">Index</a>
+</div>
+
+
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+<div class="posts-list">
+  
+  <article>
+    <a class="post-preview" href="../blog/addinslist-package/index.html">
+	    <h2 class="post-title">addinslist package: An RStudio addin to discover and install RStudio addins</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on May 9, 2016
+      </p>
+
+      <div class="post-entry">
+        RStudio addins were released in early 2016 to provide anyone with the ability to add “extensions” to RStudio. This feature has quickly become popular, but discoverability was a problem: there was just no easy way to know what addins exist. To address that issue, one month ago I created...
+        <span href="../blog/addinslist-package/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../blog/shiny-game-lightsout/index.html">
+	    <h2 class="post-title">Need any more reason to love R-Shiny? Here: you can even use Shiny to create simple games!</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on January 26, 2016
+      </p>
+
+      <div class="post-entry">
+        TL;DR Click here to play a puzzle game written entirely in Shiny (source code). Anyone who reads my blog posts knows by now that I’m very enthusiastic about Shiny (the web app framework for R - if you didn’t know what Shiny is then I suggest reading my...
+        <span href="../blog/shiny-game-lightsout/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../blog/ezknitr-package/index.html">
+	    <h2 class="post-title">ezknitr: R package to avoid the typical working directory pain when using knitr</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on December 9, 2015
+      </p>
+
+      <div class="post-entry">
+        A new package has hit the CRAN shelves this week. While knitr is one of the most useful R packages in existence, ezknitr is a simple extension to it that adds flexibility in several ways. One common source of frustration with knitr is that it assumes the...
+        <span href="../blog/ezknitr-package/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../blog/building-shiny-apps-tutorial/index.html">
+	    <h2 class="post-title">Building Shiny apps - an interactive tutorial</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on December 7, 2015
+      </p>
+
+      <div class="post-entry">
+        If you want tutoring/training in Shiny or need help with building a Shiny app, I’m available for hire. Shiny is a package from RStudio that can be used to build interactive web pages with R. While that may sound scary because of the words “web pages”, it’s geared...
+        <span href="../blog/building-shiny-apps-tutorial/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../blog/shiny-persistent-data-storage/index.html">
+	    <h2 class="post-title">Persistent data storage in Shiny apps</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on July 1, 2015
+      </p>
+
+      <div class="post-entry">
+         This article is also published on RStudio’s Shiny Articles  Shiny apps often need to save data, either to load it back into a different session or to simply log some information. However, common methods of storing data from R may not work well with Shiny. Functions like...
+        <span href="../blog/shiny-persistent-data-storage/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../2015/06/28/introducing-shinyjs-colourinput/index.html">
+	    <h2 class="post-title">Shiny finally has a colour picker - use colourInput to select colours in Shiny apps</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on June 28, 2015
+      </p>
+
+      <div class="post-entry">
+        NOTE: the colour input described here is no longer part of shinyjs and is now available in the colourpicker package instead.  I don’t always think Shiny is missing anything, but when I do - I fill in the gap myself.  That was meant to be read...
+        <span href="../2015/06/28/introducing-shinyjs-colourinput/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../2015/06/14/mimicking-google-form-shiny/index.html">
+	    <h2 class="post-title">Mimicking a Google Form with a Shiny app</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on June 14, 2015
+      </p>
+
+      <div class="post-entry">
+        In this post we will walk through the steps required to build a shiny app that mimicks a Google Form. It will allow users to submit responses to some input fields, save their data, and allow admins to view the submitted responses. Like many of my other posts, it may...
+        <span href="../2015/06/14/mimicking-google-form-shiny/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../2015/05/31/shinyjs-extend/index.html">
+	    <h2 class="post-title">New shinyjs version: Useful tools for any Shiny app developer + easily call JavaScript functions as R code</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on May 31, 2015
+      </p>
+
+      <div class="post-entry">
+        About a month ago I made an announcement about the initial release of shinyjs. After some feedback, a few feature requests, and numerous hours of work, I’m excited to say that a new version of shinyjs v0.0.6.2 was made available on CRAN this week. The package’s main...
+        <span href="../2015/05/31/shinyjs-extend/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../2015/05/17/analyzing-rbloggers-posts-via-twitter/index.html">
+	    <h2 class="post-title">Analyzing R-Bloggers' posts via Twitter</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on May 17, 2015
+      </p>
+
+      <div class="post-entry">
+        For those who don’t know, every time a new blog post gets added to R-Bloggers, it gets a corresponding tweet by @Rbloggers, which gets seen by Rbloggers’ ~20k followers fairly fast. And every time my post gets published, I can’t help but check up on how many people...
+        <span href="../2015/05/17/analyzing-rbloggers-posts-via-twitter/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="../2015/05/09/setup-rstudio-shiny-server-digital-ocean/index.html">
+	    <h2 class="post-title">How to get your very own RStudio Server and Shiny Server with DigitalOcean</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on May 9, 2015
+      </p>
+
+      <div class="post-entry">
+        If you want help setting up your Shiny Server, a 1-on-1 walk-through or tutorial, or just general consultation about using Shiny Server, I’m available for hire. If you’ve always wanted to have an RStudio Server of your own so that you can access R from anywhere, or your...
+        <span href="../2015/05/09/setup-rstudio-shiny-server-digital-ocean/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+</div>
+
+
+<ul class="pager main-pager">
+  
+  <li class="previous">
+    <a href="../index.html">&larr; Newer Posts</a>
+  </li>
+  
+  
+  <li class="next">
+    <a href="../page3/index.html">Older Posts &rarr;</a>
+  </li>
+  
+</ul>
+
+
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../cdn-cgi/l/email-protection.html#701415111e30110404111c19041513185e131f1d4f0305121a1513044d38151c1c1f5016021f1d501415111e110404111c195e131f1d" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../cdn-cgi/l/email-protection.html#690d0c080729081d1d0805001d0c0a01470a0604561a1c0b030c0a1d54210c050506490f1b0604490d0c0807081d1d080500470a0604"><span class="__cf_email__" data-cfemail="a4c0c1c5cae4c5d0d0c5c8cdd0c1c7cc8ac7cbc9">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../js/bootstrap.min.js"></script>
+  
+	<script src="../js/js.cookie.js"></script>
+  
+	<script src="../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/page2/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:42 GMT -->
+</html>

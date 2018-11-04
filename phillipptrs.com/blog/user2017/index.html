@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/blog/user2017/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>What makes an R talk popular? Scraping useR2017 attendance information to find out!</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="Click here to explore the data for yourself First off — I’ll admit that was my poor attempt at a click-bait title. But if you’re still reading the next paragraph, that means it was successful! Table of contents Background Am I number 1?! Scraping individual event information from the useR...">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="What makes an R talk popular? Scraping useR2017 attendance information to find out!" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="../../img/blog/user2017/user2017.png" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="What makes an R talk popular? Scraping useR2017 attendance information to find out!" />
+  <meta name="twitter:description" content="Click here to explore the data for yourself First off — I’ll admit that was my poor attempt at a click-bait title. But if you’re still reading the next paragraph, that means it was successful! Table of contents Background Am I number 1?! Scraping individual event information from the useR..." />
+  
+  <meta name="twitter:image" content="../../img/blog/user2017/user2017.png" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../../index.html">
+	      <img class="avatar-img" src="../../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>What makes an R talk popular? Scraping useR2017 attendance information to find out!</h1>
+		  
+		  
+		  
+		    <span class="post-meta">
+                      Posted on August 2, 2017
+                       
+                    </span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+      
+        
+        
+        
+      
+        <div id="header-gh-btns">
+          
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=user2017&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=user2017&amp;type=watch&amp;v=2&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;type=follow&amp;count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              
+            
+          
+        </div>
+      
+     
+      <article role="main" class="blog-post">
+        
+  
+    <div id="deancarbonads" class="sm-horizontal">
+      <script async type="text/javascript" src="http://cdn.carbonads.com/carbon.js?serve=CKYIL5Q7&amp;placement=deanattalicom" id="_carbonads_js"></script>
+    </div>
+  
+
+
+      	<div style="text-align:center;">
+<a class="btn btn-lg btn-success" href="https://daattali.com/shiny/user2017/">Click here to explore the data for yourself</a>
+</div>
+
+<p>First off — I’ll admit that was my poor attempt at a click-bait title. But if you’re still reading the next paragraph, that means it was successful!</p>
+
+<h1 id="table-of-contents">Table of contents</h1>
+
+<ul>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#number1">Am I number 1?!</a></li>
+  <li><a href="#scrapeindividual">Scraping individual event information from the useR Sched website</a></li>
+  <li><a href="#scrapeall">Scrape all events data into one dataset</a></li>
+  <li><a href="#bigmoment">The moment we all (or at least I) waited for!</a></li>
+  <li><a href="#normalize">Normalizing for parallel sessions</a></li>
+  <li><a href="#visualize">Visualizing the data and making observations</a>
+    <ul>
+      <li><a href="#type_v_attendance">Want attendnace? Don’t sponsor the conference, try to get invited!</a></li>
+      <li><a href="#time_v_attendance">Does attendance drop off with time?</a></li>
+      <li><a href="#type_attendance_ratio">Quick look at attendance ratios</a></li>
+      <li><a href="#top_rooms">Are some rooms better than others?</a></li>
+      <li><a href="#correlation">Correlation obviously implies causation</a></li>
+    </ul>
+  </li>
+  <li><a href="#improvements">Improvements</a></li>
+  <li><a href="#explore">Explore or reproduce the data yourself</a></li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<p>Last week I attended the <a href="https://user2017.brussels/">useR 2017 conference</a> in Belgium<a href="#footnote">*</a> — where 1,161 R users from all around the world gathered for 4 days to live and breath R. I still consider myself somewhat new to R (less than 4 years), so I still get extremely excited to go to these conferences! So excited, in fact, that I was fine parting with over $2,000 out of my own pocket to attend…</p>
+
+<p>A few weeks before the conference, all attendees received an email with an invitation to a <a href="https://user2017.sched.com/">scheduling app/website</a> called Sched. We could use this website to browse through all the events at the conference - keynote talks, lightning talks, regular talks, tutorials, coffee breaks, lunch breaks, and anything else that was in the schedule. We could also mark which events we planned to attend.  There was incentive for us to select the talks we planned on attending, because there were often several talks in parallel, and Sched could show me my personalized schedule so that I’d know where to go for the talks I’m interested in.</p>
+
+<p><a href="../../img/blog/user2017/sched.png"><img src="../../img/blog/user2017/sched.png" alt="Sched screenshot" /></a></p>
+
+<blockquote>
+  <p>Screenshot of the Sched website. Checkmarks indicate events that I marked as attending.</p>
+</blockquote>
+
+<p>If you click on any event, you are taken to a new page that shows a more detailed view of that event. It will list all sorts of metadata for the event, such as its location, start time, end time, description, and name of speaker when applicable. Each event also keeps track of how many people added it to their own schedules - which was the interesting piece of information for me. This essentially acts as a popularity gauge, by showing how many attendees are interested in each event.</p>
+
+<p><a href="../../img/blog/user2017/scheddetails.png"><img src="../../img/blog/user2017/scheddetails.png" alt="Sched detailed screenshot" /></a></p>
+
+<blockquote>
+  <p>Detailed view of an event</p>
+</blockquote>
+
+<h2 id="number1">Am I number 1?!</h2>
+
+<p>As I was prepping for my lightning talk, I wanted to see how many people said they’d attend my talk (even though I realize the number of RSVP is a very bad estimate for the real attendance). So I went to the <a href="https://user2017.sched.com/event/AxrJ/plot-colour-helper-finally-an-easy-way-to-pick-colours-for-your-r-plots">event page for my talk</a> and saw that it had 159 attendees.</p>
+
+<p><em>Great!</em></p>
+
+<p>But I had no idea how that compares with other lightning talks… I <em>obviously</em> had to investigate the matter further to see where I rank, so I opened the pages of another ~20 lightning talks and checked their attendance numbers. It seemed like I had more attendees than all the talks I checked. Then I thought <em>“why not do this properly? Instead of spending 10 minutes manually opening all the lightning talk pages and looking at that number, I could spend 10 times longer doing it automatically with R!”</em></p>
+
+<p>(By the way, <a href="../../colourpicker-user2017/index.html">you can watch my talk here</a> if you’re interested - it’s about a tool I built for making it easier to select colours for your plots.)</p>
+
+<h2 id="scrapeindividual">Scraping individual event information from the useR Sched website</h2>
+
+<p>For anyone who’s not familiar with the term, <strong>scraping</strong> a webpage means to programmatically extract information from it. What I was manually doing - scanning the main Sched page for any lightning talks, clicking on them, recording the number of attendees from each page - that can be automated, and this process would be called scraping.</p>
+
+<p>Before useR started, I already had the idea that I wanted to scrape the useR schedule website to find out how my talk compared to others. But I haven’t found the time to do it. While at useR, I met <a href="https://twitter.com/daroczig">Gergely Daróczi</a>, who runs an R meetup group in Budapest, Hungary, and he invited me to give a talk at their next meetup which would be about highlights from useR. I decided this was a good reason for me to actually go through with my mini project, and told him I would scrape the schedule and present any interesting findings.</p>
+
+<p>Next week, while on my Wi-Fi-equipped train to Budapest, I had a few hours to kill so I decided it was a good time to work on this. The best way to scrape the web with R is using the <a href="https://cran.r-project.org/package=rvest"><code class="highlighter-rouge">rvest</code></a> package, and it is very easy to do so.</p>
+
+<p>I noticed that every event page had the same URL pattern of <code class="highlighter-rouge">https://user2017.sched.com/event/&lt;ID&gt;</code>. So the first thing I did was write a function <code class="highlighter-rouge">get_event_data()</code> that takes an event’s unique ID, reads its event page, and extracts several pieces of interesting information: title, attendance (what I was originally interested in), speaker name, time, location, and event type.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Get all info for a talk from its event URL; return a one-row tibble</span><span class="w">
+</span><span class="n">get_event_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">event_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Read the HTML page</span><span class="w">
+  </span><span class="n">base_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://user2017.sched.com/event/"</span><span class="w">
+  </span><span class="n">full_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span><span class="w"> </span><span class="n">event_id</span><span class="p">)</span><span class="w">
+  </span><span class="n">content</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_html</span><span class="p">(</span><span class="n">full_url</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Extract information from the page</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">".event a.name"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="n">attendance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">"#sched-page-event-attendees h2"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".*\\((.*)\\).*"</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\\1"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="nf">as.numeric</span><span class="p">()</span><span class="w">
+  </span><span class="n">speaker</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">".sched-person h2 a"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="n">time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">".sched-event-details-timeandplace"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".*(July.*) -.*"</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\\1"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">strptime</span><span class="p">(</span><span class="s2">"%B %d, %Y %I:%M%p"</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CET"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">as.POSIXct</span><span class="p">()</span><span class="w">
+  </span><span class="n">room</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">".sched-event-details-timeandplace a"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="n">type</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
+    </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">html_node</span><span class="p">(</span><span class="s2">".sched-event-type a"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">(</span><span class="n">trim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Return all event information as a one-row tibble</span><span class="w">
+  </span><span class="n">tibble</span><span class="o">::</span><span class="n">tibble</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">attendance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attendance</span><span class="p">,</span><span class="w">
+                 </span><span class="n">speaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">speaker</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">room</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If you’ve never seen scraping code and are unfamiliar with CSS, this code may seem long and complex, but I promise it’s simple. The first few lines read the event webpage, and the rest of the function is simply 6 different variable declarations - one for each piece of information we want to extract. If you want to learn how to write this kind of code (again, I swear it’s not as hard as it looks!), you should look at the documentation and vignettes for <code class="highlighter-rouge">rvest</code>.</p>
+
+<p>The event page for my lightning talk is at <a href="https://user2017.sched.com/event/AxrJ">https://user2017.sched.com/event/AxrJ</a>, so this is the one-row dataframe returned by calling <code class="highlighter-rouge">get_event_data("AxrJ")</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>type</th>
+      <th style="text-align: center">title</th>
+      <th style="text-align: center">attendance</th>
+      <th>speaker</th>
+      <th>time</th>
+      <th>room</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lightning Talk</td>
+      <td style="text-align: center">Plot Colour Helper – Finally an easy way to pick colours for your R plots!</td>
+      <td style="text-align: center">159</td>
+      <td>Dean Attali</td>
+      <td>2017-07-06 17:55:00</td>
+      <td>2.02</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Looks like the function works!</p>
+
+<h2 id="scrapeall">Scrape all events data into one dataset</h2>
+
+<p>Now that we have a function that can extract relevant information from an event page using the event’s ID, the next step is to repeat this for all events. But how do we get all the IDs for all the events?</p>
+
+<p>Easy. The <a href="https://user2017.sched.com/">main useR schedule page</a> lists all the events in the conference. This means we can simply load the main page, scrape it to find all the links to the events, and in each link we extract out the event ID.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">content</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_html</span><span class="p">(</span><span class="s2">"https://user2017.sched.com"</span><span class="p">)</span><span class="w">
+</span><span class="n">event_ids</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_nodes</span><span class="p">(</span><span class="s2">".event a.name"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">html_attr</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">sub</span><span class="p">(</span><span class="s2">"/event/(.*)/.*"</span><span class="p">,</span><span class="w"> </span><span class="s2">"\\1"</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w">
+</span><span class="n">all_talks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">purrr</span><span class="o">::</span><span class="n">map_df</span><span class="p">(</span><span class="n">event_ids</span><span class="p">,</span><span class="w"> </span><span class="n">get_event_data</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This post is not meant to be a tutorial on scraping, so I will not explain each line of code, but I did try to write it in an easy-to-understand way. <code class="highlighter-rouge">sub("/event/(.*)/.*", "\\1", .)</code> is responsible for extracting the event ID from the URL. The end result after running this piece of code is a dataframe with 276 rows - meaning that there were 276 events on the schedule.</p>
+
+<h2 id="bigmoment">The moment we all (or at least I) waited for!</h2>
+
+<p>Whew, we made it. Now I can finally answer my original question: were people excited by my talk? (Yes, I realize how vain the premise of this article is…) With a very simple <code class="highlighter-rouge">dplyr</code> expression we can now query the data to find the top 5 lightning talks by attendance:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">all_talks</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Lightning Talk"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">attendance</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">head</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>type</th>
+      <th>title</th>
+      <th>attendance</th>
+      <th>speaker</th>
+      <th>time</th>
+      <th>room</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lightning Talk</td>
+      <td>Automatic Machine Learning in R</td>
+      <td>235</td>
+      <td>Erin LeDell</td>
+      <td>2017-07-06 17:40:00</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>Lightning Talk</td>
+      <td>Using R for optimal beer recipe selection</td>
+      <td>175</td>
+      <td>Benjamin Høyer</td>
+      <td>2017-07-06 18:05:00</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>Lightning Talk</td>
+      <td>heatmaply: an R package for creating interactive …</td>
+      <td>166</td>
+      <td>Tal Galili</td>
+      <td>2017-07-06 17:50:00</td>
+      <td>2.02</td>
+    </tr>
+    <tr>
+      <td>Lightning Talk</td>
+      <td>Plot Colour Helper – Finally an easy way to pick colours …</td>
+      <td>159</td>
+      <td>Dean Attali</td>
+      <td>2017-07-06 17:55:00</td>
+      <td>2.02</td>
+    </tr>
+    <tr>
+      <td>Lightning Talk</td>
+      <td>R Blogging with blogdown and GitHub</td>
+      <td>157</td>
+      <td>Joseph Rickert</td>
+      <td>2017-07-06 17:30:00</td>
+      <td>3.02</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>4th place. Not even a bronze medal! A crushing defeat, I may not be able to show my face at another R conference. Looks like <a href="https://twitter.com/ledell">Erin’s</a> talk was by far the most anticipated.</p>
+
+<p>For curiosity, here are the top 5 regular (non-lightning) talks:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>type</th>
+      <th>title</th>
+      <th>attendance</th>
+      <th>speaker</th>
+      <th>time</th>
+      <th>room</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Talk</td>
+      <td>Show Me Your Model: tools for visualisation of statistic…</td>
+      <td>519</td>
+      <td>Przemyslaw Biecek</td>
+      <td>2017-07-06 11:00:00</td>
+      <td>PLENARY</td>
+    </tr>
+    <tr>
+      <td>Talk</td>
+      <td>Scraping data with rvest and purrr</td>
+      <td>362</td>
+      <td>Max Humber</td>
+      <td>2017-07-06 11:36:00</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>Talk</td>
+      <td>Text mining, the tidy way</td>
+      <td>351</td>
+      <td>Julia Silge</td>
+      <td>2017-07-05 13:30:00</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>Talk</td>
+      <td>Programming with tidyverse grammars</td>
+      <td>350</td>
+      <td>Lionel Henry</td>
+      <td>2017-07-07 11:00:00</td>
+      <td>4.02</td>
+    </tr>
+    <tr>
+      <td>Talk</td>
+      <td>How we built a Shiny App for 700 users?</td>
+      <td>321</td>
+      <td>Olga Mierzwa-Sulima</td>
+      <td>2017-07-05 11:00:00</td>
+      <td>4.02</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here, too, there was one talk that dominated all the rest.</p>
+
+<p><strong>You can interactively explore this dataset, both in tabular form and graphically, <a href="https://daattali.com/shiny/user2017/">in this Shiny app</a>.</strong></p>
+
+<h2 id="normalize">Normalizing for parallel sessions</h2>
+
+<p>The talk with the highest attendance was a Keynote by Yves Rosseel titled “Structural Equation Modeling: models, software and stories” with 602 people RSVPing. Does that mean it was the most popular talk?</p>
+
+<p>By absolute numbers, yes. But I think it’s important to take parallel sessions into account when measuring popularity. Out of the 1,161 conference participants, 966 of them used the Sched application (according to a quick rvest scrape I ran). This means that 602/966, or 0.62, of the users RSVPed to Yves’ keynote.</p>
+
+<p>The keynote talk was the only event that was going on at the time, so when looking at the schedule and marking talks to attend, people either chose to attend this talk or to not attend anything (this is a very naive perspective - of course it’s possible they wanted to attend but had a personal schedule conflict for example). On the other hand, the most popular regular talk had an attendance of 519, <em>but</em> there were 5 other talks going on at the same time.</p>
+
+<p>I would argue that assuming all conference goers are attending an event at any given time, the keynote talk should in theory expect to have an attendance of 966. Similarly, if there are 6 talks concurrently, assuming all else is equal, each talk should have about 1/6 of the total attendance, in this case 966/6 = 161. With an expected attendance of 161 and actual attendance (well, not <em>actual</em>, because we don’t know how many people were there, this is based on RSVP) of 519, an attendance ratio can be calculated as 519/161 = 3.22 for the talk. Going by this metric, this talk was more popular than the keynote relative to its expected attendance. This is clearly making a lot of big assumptions and doesn’t account for things like people RSVPing for multiple talks - it’s by no means a correct model for expected attendance - but it’s simple and has <em>some</em> logic behind it.</p>
+
+<p>Using this model, I calculated the number of parallel sessions, expected attendance, and attendance ratio for each talk and added it to the dataframe.</p>
+
+<h2 id="visualize">Visualizing the data and making observations</h2>
+
+<p><strong>You can play with this data and make these plots yourself <a href="https://daattali.com/shiny/user2017/">in this Shiny app</a>.</strong></p>
+
+<h3 id="type_v_attendance">Want attendnace? Don’t sponsor the conference, try to get invited!</h3>
+
+<p>Let’s start with a very simple plot - <strong>event type vs attendance</strong>.</p>
+
+<p><a href="../../img/blog/user2017/type_vs_attendance.png"><img src="../../img/blog/user2017/type_vs_attendance.png" alt="type vs attendance" /></a></p>
+
+<p>There’s a few things I quickly noticed when looking at this:</p>
+
+<ul>
+  <li>It’s easy to see there was one lightning talk and one regular talk that stood out from all the rest.</li>
+  <li>Invited talks (keynotes) were the most popular events (in absolute numbers).</li>
+  <li>Sponsor talks attendance was very bimodal, with half of them being extremely low, and the other half being fairly popular.</li>
+  <li>All of the sponsor talks were less popular than the keynotes. There can be many reasons for this (the obvious ones being that keynotes have specific interesting topics and are much longer and are regarded as a main event), but I found it interesting. Perhaps if you want to attract people to your talk, instead of sponsoring the conference you’re better off being invited :)</li>
+</ul>
+
+<h3 id="time_v_attendance">Does attendance drop off with time?</h3>
+
+<p>A similar plot can be made for <strong>time vs attendance</strong>:</p>
+
+<p><a href="../../img/blog/user2017/time_vs_attendance.png"><img src="../../img/blog/user2017/time_vs_attendance.png" alt="time vs attendance" /></a></p>
+
+<p>The main reason I was interested in this plot was because I wanted to test my theory that attendance was getting lower with time. I had two reasons to believe this: first of all, many people left on the last day (Friday July 7). Secondly, I thought many people would be too lazy to go through all the schedule events and would be less likely to RSVP to events that are later in time simply because they wouldn’t take the time to go through the list all the way down.</p>
+
+<p>Unfortunately, the plot doesn’t show any of these things conclusively. There is a general downward trend on the last day, but without any quantitative analysis I can’t say whether it’s likely a real effect or random.</p>
+
+<h3 id="type_attendance_ratio">Quick look at attendance ratios</h3>
+
+<p>Let’s take a look at <strong>type vs attendance ratio</strong> instead of absolute attendance. In this plot, the colour grouping is based on room instead of type.</p>
+
+<p><a href="../../img/blog/user2017/type_vs_attendance_ratio_by_room.png"><img src="../../img/blog/user2017/type_vs_attendance_ratio_by_room.png" alt="type vs attendance ratio" /></a></p>
+
+<p>Other than the one talk that stands out with an attendance ratio of &gt;3, which we already knew about, there is one other thing that jumps out at me. It seems like a lot of the popular talks were in room 4.02.</p>
+
+<h3 id="top_rooms">Are some rooms better than others?</h3>
+
+<p>Actually, looking at <a href="#bigmoment">the table above</a> for the top 5 talks, 4 out of the top 5 were in fact in room 4.02. If we calculate the average attendance ratio of all talks in each room, we see that room 4.02 really was the most popular:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>room</th>
+      <th>attendance ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4.02</td>
+      <td>1.33</td>
+    </tr>
+    <tr>
+      <td>PLENARY</td>
+      <td>0.98</td>
+    </tr>
+    <tr>
+      <td>2.02</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <td>3.02</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <td>2.01</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <td>3.01</td>
+      <td>0.49</td>
+    </tr>
+    <tr>
+      <td>4.01</td>
+      <td>0.43</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interestingly, the only top-5 talk that was not in room 4.02 was in the Plenary room, which is second place.</p>
+
+<p>We can look at a similar table for lightning talks instead of regular talks:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>room</th>
+      <th>attendance ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2.02</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>4.02</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <td>3.02</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <td>3.01</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <td>4.01</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <td>2.01</td>
+      <td>0.23</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It’s interesting to see that all the *.02 rooms had talks that were more popular than the *.01 rooms. Remember that when people RSVP to events, they don’t know the room size, they mostly decide based on the title and description. Perhaps the themes of the *.01 rooms were less interesting to more people, maybe because they were more domain-specific? Whatever the case may be, I wonder if the *.02 rooms are bigger, and if the conference organizers anticipated which talks would be more popular and placed them in the appropriate rooms. I’d be very impressed if that is indeed the case.</p>
+
+<h3 id="correlation">Correlation obviously implies causation</h3>
+
+<p>I wanted to dig a bit deeper into the clear bimodality of the sponsor talk attendance. Here is the data for all sponsor talks (all sponsor talks were in the same room so I omit that column):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>type</th>
+      <th>title</th>
+      <th>attendance</th>
+      <th>speaker</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>Sponsor Talk Microsoft</td>
+      <td>348</td>
+      <td>NA</td>
+      <td>2017-07-05 09:15:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>Sponsor Talk Data Camp</td>
+      <td>335</td>
+      <td>NA</td>
+      <td>2017-07-05 15:30:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>Sponsor Talk Open Analytics</td>
+      <td>289</td>
+      <td>NA</td>
+      <td>2017-07-06 09:15:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>Sponsor Talk Rstudio</td>
+      <td>354</td>
+      <td>Tareef Kawaf</td>
+      <td>2017-07-06 15:30:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>SPONSOR TALK EODA</td>
+      <td>38</td>
+      <td>Oliver Bracht</td>
+      <td>2017-07-06 16:45:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>SPONSOR TALK ORACLE</td>
+      <td>37</td>
+      <td>Mark Hornick</td>
+      <td>2017-07-06 16:55:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>SPONSOR TALK MANGO SOLUTIONS</td>
+      <td>32</td>
+      <td>Grace Meyer</td>
+      <td>2017-07-06 17:00:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>SPONSOR TALK ALTERYX</td>
+      <td>34</td>
+      <td>Dan Putler</td>
+      <td>2017-07-06 17:05:00</td>
+    </tr>
+    <tr>
+      <td>Sponsor talk</td>
+      <td>Sponsor Talk Rconsortium</td>
+      <td>243</td>
+      <td>NA</td>
+      <td>2017-07-07 09:15:00</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Do you notice what I first noticed? All the sponsor talks that had “SPONSOR” (all caps) in the title had low attendance, while the sponsor talks with “Sponsor” in the title did well.</p>
+
+<p>Coincidence? I think not. Clearly a government conspiracy to shut up some sponsors!</p>
+
+<p>A few other factors that can contribute to this:</p>
+<ul>
+  <li>All the low-attendance sponsor talks are for bronze sponsors (silver and gold sponsors had high attendance).</li>
+  <li>The gold sponsors had 15 minutes, silver had 10 minutes, and bronze had 5 minutes. Maybe seeing a 5 minute sponsor talk makes it look less interesting because how much can you say in 5 minutes?</li>
+  <li>The gold and silver sponsors were always placed just before a keynote talk, while all the bronze sponsors were one after the other in a sort of “sponsor hour”. Maybe it’s like with commercials - when there’s one or two intermingled with your show, you don’t mind watching it, but if there’s a good chunk of time dedicated to them, you might flip the channel (flip the channel? Who still remembers what cable is?!). This isn’t a fair comparison between commercials and sponsor talks, just a little theory.</li>
+  <li>In all seriousness, I do think there can be a slight effect to ALL-CAPS vs regular caps. ALL-CAPS titles are sometimes associated with lower quality in my experience, for example when I see articles on Facebook or Twitter. I don’t know if there’s any hidden bias for people against a talk that’s in ALL-CAPS, but maybe?</li>
+</ul>
+
+<h2 id="improvements">Improvements</h2>
+
+<p>The scraping code and analysis was written on a short train ride and is by no means “good” code. I also did not look at many other things that can be interesting. To name just a few other things I would love to look at:</p>
+
+<ul>
+  <li>Length of each event. Right now, I scrape most of the metadata from each event page, but I did not think of scraping the end time, and therefore calculating the length of each event. It might be a nice addition.</li>
+  <li>I also didn’t take the tags of each talk into account - each talk was tagged with keywords, and it’d be interesting to see if any tags are particularly attractive or off-putting.</li>
+  <li>This isn’t a realistic option, but it would have been great if we had access to the real attendance of each event. That way we could see how accurate the RSVPs are. For example, I woder how many people indicated on their schedules that they want to attend Erin’s “Automatic Meachine Learning in R” lightning talk as well as my talk in another room, and ended up actually moving between the rooms on such a tight schedule.</li>
+  <li>It is also possible to scrape individual people’s schedules (for example <a href="https://user2017.sched.com/daattali">here is my schedule</a>), so I’d be interested to see if there are any clusters. Can we predict what talks someone will like based on other talks they chose? I believe <a href="https://twitter.com/andypryke">Andy Pryke</a> attempted to do something similar for last year’s useR and he mentioned that he didn’t find it particularly interesting.</li>
+</ul>
+
+<h2 id="explore">Explore or reproduce the data yourself</h2>
+
+<p>You can interactively explore this dataset to get the same visualizations that I showed and more using <a href="https://daattali.com/shiny/user2017/">this Shiny app</a>.</p>
+
+<p>All the scraping code, Shiny app code, and scraped data is available <a href="https://github.com/daattali/user2017">on GitHub</a>.</p>
+
+<p><a href="../../colourpicker-user2017/index.html">Here is a recording of my lightning talk</a> about Plot Colour Helper.</p>
+
+<p>By the way, the slides for my talk in Budapest <a href="https://docs.google.com/presentation/d/1pwwgIbo075i4m2VOLosuDQnx2acapL3ONF9schvKP64/edit?usp=sharing">are here</a>.</p>
+
+<hr />
+
+<p><span id="footnote"></span><em>By the time I got around to publish this post it’s actually closer to a month ago, but all the data and content in this post are from the week after the conference.</em></p>
+
+      </article>
+      
+      
+        <div class="blog-tags">
+          Tags:
+          
+            
+              <a href="../../tags/index.html#professional">professional</a>
+            
+              <a href="../../tags/index.html#rstats">rstats</a>
+            
+              <a href="../../tags/index.html#r-bloggers">r-bloggers</a>
+            
+              <a href="../../tags/index.html#shiny">shiny</a>
+            
+          
+        </div>
+      
+
+      
+  <div class="share-section">
+    <h1 class="share-title">Liked what you read?</h1>
+    
+    
+      <div class="share-buttons">
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        <a href="../../contact/index.html" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/user2017/">
+          Let me know
+        </a>
+        <!--
+        <a href="https://www.facebook.com/dialog/feed?app_id=536330676521989&link=https://deanattali.com/blog/user2017/&name=What makes an R talk popular? Scraping useR2017 attendance information to find out!&caption=deanattali.com&redirect_uri=https://deanattali.com/blog/user2017/?message=Thanks for sharing!&picture=https://deanattali.com/img/blog/user2017/user2017.png" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/user2017/">
+          Share on Facebook
+        </a>
+        -->
+        <a href="https://www.paypal.me/daattali/10" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="/blog/user2017/">
+          Support me
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://deanattali.com/blog/user2017/&amp;via=daattali&amp;hashtags=rstats&amp;text=What%20makes%20an%20R%20talk%20popular?%20Scraping%20useR2017%20attendance%20information%20to%20find%20out!" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/user2017/">
+          Tweet it
+        </a>
+      </div>
+    
+    
+    
+      <!-- MailChimp Signup Form -->
+      <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-share">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-share">
+      	      <label for="mce-EMAIL-share">Sign up to my Shiny newsletter</label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-share" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-share" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+
+  </div>
+
+
+      
+      
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="../plot-colour-helper/index.html" data-toggle="tooltip" data-placement="top" title="Plot Colour Helper - Finally an easy way to pick colours for your R plots!">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="../colourpicker-update-alpha/index.html" data-toggle="tooltip" data-placement="top" title="colourpicker package v1.0: You can now select semi-transparent colours in R (& more!)">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'deanattali-site';
+	    // ensure that pages with query string or anchor get the same discussion
+            var url_parts = window.location.href.split("?");
+            url_parts = url_parts[0].split("#");
+            disqus_url = url_parts[0];
+            disqus_url = disqus_url.replace(/(\/)*$/, "/"); // make sure the URL ends with one slash
+            disqus_url = disqus_url.replace(/https:\/\//, "http:\/\/"); // make sure new https pages use same comments as old http site
+            
+            // Jekyll 3 caused so many bugs, I'm tired of fixing them one by one properly, so I'll just hack it...
+            // https://github.com/jekyll/jekyll/issues/4483
+            // The projects page now has a trailing slash, it didn't used to
+            if (disqus_url.substr(-9) == "projects/index.html") {
+            	disqus_url = disqus_url.substr(0, disqus_url.length - 1);
+            }
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+      
+      <div id="scroll-box">
+  <div id="scroll-box-close">&times;</div>
+  <div id="scroll-box-hire">
+    Need Shiny help?
+    <a href="../../shiny/index.html">Hire me!</a>
+  </div>
+  <div id="mailchimp-subscribe-section-scrollbox" class="mailchimp-subscribe-section">
+    <div id="mc_embed_signup-scrollbox">
+      <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-scrollbox" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+        <div id="mc_embed_signup_scroll-scrollbox">
+  	      <label for="mce-EMAIL-scrollbox">Sign up to my Shiny newsletter</label>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+  	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-scrollbox" placeholder="Email" required="">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-scrollbox" class="button" title="Sign up to my Shiny newsletter">
+              </div>
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="scroll-box-contact">
+    Questions/comments?
+    <a href="../../contact/index.html">Contact me!</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../../cdn-cgi/l/email-protection.html#4c28292d220c2d38382d202538292f24622f2321733f392e26292f387104292020236c2a3e23216c28292d222d38382d2025622f2321" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../../cdn-cgi/l/email-protection.html#6d09080c032d0c19190c010419080e05430e0200521e180f07080e195025080101024d0b1f02004d09080c030c19190c0104430e0200"><span class="__cf_email__" data-cfemail="8febeaeee1cfeefbfbeee3e6fbeaece7a1ece0e2">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../../js/bootstrap.min.js"></script>
+  
+	<script src="../../js/js.cookie.js"></script>
+  
+	<script src="../../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+     
+      <!-- AddThis plugin (floating social media sharing buttons on the left of each post) -->
+      <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57d65a4d97789dd1"></script>
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/blog/user2017/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:17 GMT -->
+</html>

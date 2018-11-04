@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.deanattali.com	TRUE	/	FALSE	1999999999	__cfduid	d7b8b62be202edeba783292f962f64e871541298090
+

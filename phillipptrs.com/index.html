@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:17:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>Phillip Pieterse - R-Shiny consultant</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="Web developer and a Bachelor of Computer Science.">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Phillip Pieterse - Web developer and a Bachelor of Computer Science." href="feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+    
+      <link rel="stylesheet" href="css/index.css" />
+    
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Phillip Pieterse - Web Developer" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="img/phillipimg.jpg" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@phillipptrs" />
+  <meta name="twitter:creator" content="@phillipptrs" />
+  <meta name="twitter:title" content="Hi, I'm Phillip" />
+  <meta name="twitter:description" content="All posts Most Popular Tutorials Index {% include datacamp_course_promo.html %} {% for post in paginator.posts %} {{ post.title }} {% if post.subtitle %} {{ post.subtitle }} {% endif %} Posted on {{ post.date | date: &quot;%B %-d, %Y&quot; }} {{ post.content | truncatewords: 50 | strip_html | xml_escape}} [Read&amp;nbsp;More] {%..." />
+  
+  <meta name="twitter:image" content="img/phillipimg.jpg" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Phillip Pieterse</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="index.html">
+	      <img class="avatar-img" src="img/phillipimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+  <div id="header-big-imgs" data-num-img=10
+    
+	  
+	  
+	    
+		  data-img-src-1="img/big-imgs/chess.jpg"
+		  data-img-desc-1="Springs Mall, Boksburg (2018)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-2="img/big-imgs/2.jpg"
+		  data-img-desc-2="Kali (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-3="img/big-imgs/3.png"
+		  data-img-desc-3="Miners (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-4="img/big-imgs/4.png"
+		  data-img-desc-4="Assassin (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-5="img/big-imgs/5.jpg"
+		  data-img-desc-5="Dragons (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-6="img/big-imgs/6.jpg"
+		  data-img-desc-6="Kali Dragon (2014)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-7="img/big-imgs/7.jpg"
+		  data-img-desc-7="Hackers (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-8="img/big-imgs/8.jpg"
+		  data-img-desc-8="Pretoria (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-9="img/big-imgs/9.jpg"
+		  data-img-desc-9="Boksburg (2013)"
+		
+	  
+    
+	  
+	  
+	    
+		  data-img-src-10="img/big-imgs/10.jpg"
+		  data-img-desc-10="Road Trip (2014)"
+
+	  
+    
+  ></div>
+
+
+<header class="header-section has-img">
+
+<div class="big-img intro-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Hi, I'm Phillip</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">Web Developer / Software Tool Builder / Traveller</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class='img-desc'></span>
+</div>
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Hi, I'm Phillip</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">Web Developer / Software Tool Builder / Traveller</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+
+      <div class="list-filters">
+  <a href="index.html" class="list-filter filter-selected">All posts</a>
+  <a href="popular/index.html" class="list-filter">Most Popular</a>
+  <a href="tutorials/index.html" class="list-filter">Tutorials</a>
+  <a href="tags/index.html" class="list-filter">Index</a>
+</div>
+
+
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Development skills?</strong><br/>
+    Try the new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+<div class="posts-list">
+  
+  <article>
+    <a class="post-preview" href="blog/cranalerts/index.html">
+	    <h2 class="post-title">CRANalerts: Get email alerts when a CRAN package gets updated</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on April 11, 2018
+      </p>
+
+      <div class="post-entry">
+        Have you ever found yourself asking “how can I make sure I don’t miss the next version release of package X”? That’s the exact problem I set out to solve with CRANalerts. Simply provide your email address and an R package name, and every time the package gets updated...
+        <span href="blog/cranalerts/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/mutate-non-vectorized/index.html">
+	    <h2 class="post-title">How to use dplyr's mutate in R without a vectorized function</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on April 9, 2018
+      </p>
+
+      <div class="post-entry">
+        If you’re reading this, you’ve either encountered this problem before, or you just got to this article out of curiosity (in which case you probably don’t know what problem I’m talking about). A few days ago I was given code by a client for a function that, given a path...
+        <span href="blog/mutate-non-vectorized/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/shiny-use-cases-datacamp-course/index.html">
+	    <h2 class="post-title">Shiny Case Studies: My new online interactive video course</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on February 26, 2018
+      </p>
+
+      <div class="post-entry">
+        Last week, my brand new DataCamp course Shiny Case Studies was finally released after being in the works for a full year!  Check out the course  This is an online course consisting of a series of short videos, mulitple choice exercises, and...
+        <span href="blog/shiny-use-cases-datacamp-course/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/shinyalert-package/index.html">
+	    <h2 class="post-title">shinyalert: Easily create pretty popup messages (modals) in Shiny</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on February 13, 2018
+      </p>
+
+      <div class="post-entry">
+        A brand new shiny package has entered the world yesterday: shinyalert. It does only one thing, but does it well: show a message to the user in a modal (aka popup, dialog, or alert box). Actually, it can do one more thing: shinyalert can also be used...
+        <span href="blog/shinyalert-package/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/colourpicker-update-alpha/index.html">
+	    <h2 class="post-title">colourpicker package v1.0: You can now select semi-transparent colours in R (& more!)</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on October 16, 2017
+      </p>
+
+      <div class="post-entry">
+        For those who aren’t familiar with the colourpicker package, it provides a colour picker for R that can be used in Shiny, as well as other related tools. Today it’s leaving behind its 0.x days and moving on to version 1.0! colourpicker has gone through a...
+        <span href="blog/colourpicker-update-alpha/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/user2017/index.html">
+	    <h2 class="post-title">What makes an R talk popular? Scraping useR2017 attendance information to find out!</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on August 2, 2017
+      </p>
+
+      <div class="post-entry">
+         Click here to explore the data for yourself  First off — I’ll admit that was my poor attempt at a click-bait title. But if you’re still reading the next paragraph, that means it was successful! Table of contents  Background &lt;a...
+        <span href="blog/user2017/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/plot-colour-helper/index.html">
+	    <h2 class="post-title">Plot Colour Helper - Finally an easy way to pick colours for your R plots!</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on January 9, 2017
+      </p>
+
+      <div class="post-entry">
+        You’ve just made an amazing plot in R, and the only thing remaining is finding the right colours to use. Arghhh this part is never fun… You’re probably familiar with this loop: try some colour values -&amp;gt; plot -&amp;gt; try different colours -&amp;gt; plot -&amp;gt; repeat. Don’t you wish there...
+        <span href="blog/plot-colour-helper/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/htmlwidgets-tips/index.html">
+	    <h2 class="post-title">How to write a useful htmlwidgets in R: tips and walk-through a real example</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on October 18, 2016
+      </p>
+
+      <div class="post-entry">
+        I’d like to share some tips and recommendations on building htmlwidgets, based on my own learning experience while creating timevis. These tips are mostly concerned with making your htmlwidget more useful and user friendly. In this post, every tip I provide will be followed by an actual code...
+        <span href="blog/htmlwidgets-tips/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/advanced-shiny-tips/index.html">
+	    <h2 class="post-title">Shiny tips & tricks for improving your apps and solving common problems</h2>
+	
+	    
+      <p class="post-meta">
+        Posted on August 29, 2016
+      </p>
+
+      <div class="post-entry">
+        This document contains a collection of various Shiny tricks that I commonly use or that I know many people ask about. Each link contains a complete functional Shiny app that demonstrates how to perform a non trivial task in Shiny. The complete up-to-date list of tips, along with all the...
+        <span href="blog/advanced-shiny-tips/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+  <article>
+    <a class="post-preview" href="blog/visualize-git-commits-time/index.html">
+	    <h2 class="post-title">Visualizing when I'm most productive during the day</h2>
+	
+	    
+	    <h3 class="post-subtitle">
+	      Analyzing my (and others') git activity
+	    </h3>
+	    
+      <p class="post-meta">
+        Posted on August 19, 2016
+      </p>
+
+      <div class="post-entry">
+         Click here to explore the data yourself  Yesterday I saw this retweet from @timelyportfolio that links to a gist by @gka. The gist gave a few short scripts that can show you when your git commits take place during the...
+        <span href="blog/visualize-git-commits-time/index.html" class="post-read-more">[Read&nbsp;More]</span>
+      </div>
+    </a>  
+   </article>
+  
+</div>
+
+
+<ul class="pager main-pager">
+  
+  
+  <li class="next">
+    <a href="page2/index.html">Older Posts &rarr;</a>
+  </li>
+  
+</ul>
+
+
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="cdn-cgi/l/email-protection.html#234746424d63425757424f4a5746404b0d404c4e1c505641494640571e6b464f4f4c0345514c4e034746424d425757424f4a0d404c4e" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/phillipptrs" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/phillipptrs" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/phillipptrs" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/phillipptrs" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Phillip Pieterse
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="cdn-cgi/l/email-protection.html#85e1e0e4ebc5e4f1f1e4e9ecf1e0e6edabe6eae8baf6f0e7efe0e6f1b8cde0e9e9eaa5e3f7eae8a5e1e0e4ebe4f1f1e4e9ecabe6eae8"><span class="__cf_email__" data-cfemail="751110141b3514010114191c0110161d5b161a18">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery-1.11.2.min.js"></script>
+  
+	<script src="js/bootstrap.min.js"></script>
+  
+	<script src="js/js.cookie.js"></script>
+  
+	<script src="js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:18:41 GMT -->
+</html>

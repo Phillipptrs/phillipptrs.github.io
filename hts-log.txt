@@ -1,0 +1,74 @@
+HTTrack3.49-2 launched on Sun, 04 Nov 2018 04:17:31 at https://deanattali.com/
+(httrack https://deanattali.com/ )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+04:18:50	Warning: 	Moved Permanently for deanattali.com/robots.txt
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/robots.txt and https://deanattali.com/robots.txt
+04:18:50	Warning: 	Warning moved treated for deanattali.com/robots.txt (real one is https://deanattali.com/robots.txt)
+04:18:50	Warning: 	Moved Permanently for deanattali.com/shiny/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/shiny/ and https://deanattali.com/shiny/
+04:18:50	Warning: 	File has moved from deanattali.com/shiny/ to https://deanattali.com/shiny/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/projects/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/projects/ and https://deanattali.com/projects/
+04:18:50	Warning: 	File has moved from deanattali.com/projects/ to https://deanattali.com/projects/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/aboutme/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/aboutme/ and https://deanattali.com/aboutme/
+04:18:50	Warning: 	File has moved from deanattali.com/aboutme/ to https://deanattali.com/aboutme/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/search/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/search/ and https://deanattali.com/search/
+04:18:50	Warning: 	File has moved from deanattali.com/search/ to https://deanattali.com/search/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/popular/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/popular/ and https://deanattali.com/popular/
+04:18:50	Warning: 	File has moved from deanattali.com/popular/ to https://deanattali.com/popular/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/tutorials/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/tutorials/ and https://deanattali.com/tutorials/
+04:18:50	Warning: 	File has moved from deanattali.com/tutorials/ to https://deanattali.com/tutorials/
+04:18:50	Warning: 	Moved Permanently for deanattali.com/tags/
+04:18:50	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/tags/ and https://deanattali.com/tags/
+04:18:50	Warning: 	File has moved from deanattali.com/tags/ to https://deanattali.com/tags/
+04:19:44	Warning: 	Link https://deanattali.com/cdn-cgi/l/email-protection not scanned (follow robots meta tag)
+04:19:45	Warning: 	Moved Permanently for deanattali.com/beautiful-jekyll/
+04:19:45	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/beautiful-jekyll/ and https://deanattali.com/beautiful-jekyll/
+04:19:45	Warning: 	File has moved from deanattali.com/beautiful-jekyll/ to https://deanattali.com/beautiful-jekyll/
+04:19:50	Error: 	"Not Found" (404) at link https://deanattali.com/blog/cranalerts/projects/ (from https://deanattali.com/blog/cranalerts/)
+04:19:51	Error: 	"Not Found" (404) at link https://deanattali.com/blog/mutate-non-vectorized/projects/ (from https://deanattali.com/blog/mutate-non-vectorized/)
+04:19:52	Error: 	"Not Found" (404) at link https://deanattali.com/blog/shiny-use-cases-datacamp-course/projects/ (from https://deanattali.com/blog/shiny-use-cases-datacamp-course/)
+04:19:52	Error: 	"Not Found" (404) at link https://deanattali.com/blog/shinyalert-package/projects/ (from https://deanattali.com/blog/shinyalert-package/)
+04:19:52	Error: 	"Not Found" (404) at link https://deanattali.com/blog/colourpicker-update-alpha/projects/ (from https://deanattali.com/blog/colourpicker-update-alpha/)
+04:19:53	Error: 	"Not Found" (404) at link https://deanattali.com/blog/user2017/projects/ (from https://deanattali.com/blog/user2017/)
+04:19:53	Error: 	"Not Found" (404) at link https://deanattali.com/blog/plot-colour-helper/projects/ (from https://deanattali.com/blog/plot-colour-helper/)
+04:19:53	Error: 	"Not Found" (404) at link https://deanattali.com/blog/htmlwidgets-tips/projects/ (from https://deanattali.com/blog/htmlwidgets-tips/)
+04:19:53	Error: 	"Not Found" (404) at link https://deanattali.com/blog/advanced-shiny-tips/projects/ (from https://deanattali.com/blog/advanced-shiny-tips/)
+04:19:55	Error: 	"Not Found" (404) at link https://deanattali.com/blog/visualize-git-commits-time/projects/ (from https://deanattali.com/blog/visualize-git-commits-time/)
+04:21:09	Error: 	"Not Found" (404) at link https://deanattali.com/colourpicker-user2017/projects/ (from https://deanattali.com/colourpicker-user2017/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/blog/addinslist-package/projects/ (from https://deanattali.com/blog/addinslist-package/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/blog/shiny-game-lightsout/projects/ (from https://deanattali.com/blog/shiny-game-lightsout/)
+04:21:10	Warning: 	Moved Permanently for deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/
+04:21:10	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/ and https://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/
+04:21:10	Warning: 	File has moved from deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/ to https://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/blog/ezknitr-package/projects/ (from https://deanattali.com/blog/ezknitr-package/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/blog/building-shiny-apps-tutorial/projects/ (from https://deanattali.com/blog/building-shiny-apps-tutorial/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/blog/shiny-persistent-data-storage/projects/ (from https://deanattali.com/blog/shiny-persistent-data-storage/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/2015/06/28/introducing-shinyjs-colourinput/projects/ (from https://deanattali.com/2015/06/28/introducing-shinyjs-colourinput/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/2015/06/14/mimicking-google-form-shiny/projects/ (from https://deanattali.com/2015/06/14/mimicking-google-form-shiny/)
+04:21:10	Warning: 	Moved Permanently for deanattali.com/2015/04/23/shinyjs-r-package/
+04:21:10	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/2015/04/23/shinyjs-r-package/ and https://deanattali.com/2015/04/23/shinyjs-r-package/
+04:21:10	Warning: 	File has moved from deanattali.com/2015/04/23/shinyjs-r-package/ to https://deanattali.com/2015/04/23/shinyjs-r-package/
+04:21:10	Warning: 	Moved Permanently for deanattali.com/shinyjs/
+04:21:10	Warning: 	Redirected link is identical because of 'URL Hack' option: deanattali.com/shinyjs/ and https://deanattali.com/shinyjs/
+04:21:10	Warning: 	File has moved from deanattali.com/shinyjs/ to https://deanattali.com/shinyjs/
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/2015/05/31/shinyjs-extend/projects/ (from https://deanattali.com/2015/05/31/shinyjs-extend/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/2015/05/17/analyzing-rbloggers-posts-via-twitter/projects/ (from https://deanattali.com/2015/05/17/analyzing-rbloggers-posts-via-twitter/)
+04:21:10	Error: 	"Not Found" (404) at link https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/projects/ (from https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/)
+04:21:30	Error: 	"Not Found" (404) at link https://deanattali.com/2015/04/21/r-package-shiny-app/projects/ (from https://deanattali.com/2015/04/21/r-package-shiny-app/)
+04:21:30	Error: 	"Not Found" (404) at link https://deanattali.com/2015/04/02/flake-it-till-you-make-it/projects/ (from https://deanattali.com/2015/04/02/flake-it-till-you-make-it/)
+04:21:30	Error: 	"Not Found" (404) at link https://deanattali.com/2015/03/29/ggExtra-r-package/projects/ (from https://deanattali.com/2015/03/29/ggExtra-r-package/)
+04:21:30	Error: 	"Not Found" (404) at link https://deanattali.com/2015/03/12/beautiful-jekyll-how-to-build-a-site-in-minutes/projects/ (from https://deanattali.com/2015/03/12/beautiful-jekyll-how-to-build-a-site-in-minutes/)
+04:21:31	Error: 	"Not Found" (404) at link https://deanattali.com/2015/03/09/I-finally-have-a-site/projects/ (from https://deanattali.com/2015/03/09/I-finally-have-a-site/)
+
+HTTrack Website Copier/3.49-2 mirror complete in 4 minutes 0 seconds : 178 links scanned, 139 files written (16498280 bytes overall) [15002942 bytes received at 62512 bytes/sec], 2650830 bytes transferred using HTTP compression in 74 files, ratio 26%, 16.6 requests per connection
+(26 errors, 37 warnings, 0 messages)

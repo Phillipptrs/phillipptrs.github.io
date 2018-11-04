@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- MIT license | Copyright Dean Attali 2016 -->
+  
+<!-- Mirrored from deanattali.com/blog/shinyalert-package/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  
+  <title>shinyalert: Easily create pretty popup messages (modals) in Shiny</title>
+  
+
+  <meta name="author" content="Dean Attali" />
+  
+  
+  <meta name="description" content="A brand new shiny package has entered the world yesterday: shinyalert. It does only one thing, but does it well: show a message to the user in a modal (aka popup, dialog, or alert box). Actually, it can do one more thing: shinyalert can also be used to retrieve an...">
+  
+  
+  <meta name="keywords" content="rstats,r,r shiny,shiny apps,r shiny apps,shiny developer,r shiny developer,shiny consultant,dashboards r,interactive dashboards">
+
+  <link rel="alternate" type="application/rss+xml" title="Dean Attali - R-Shiny developer and consultant with a MSc in Bioinformatics and a Bachelor of Computer Science. Previously a software engineer at Google, IBM, and Wish.com." href="../../feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="../../css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="../../css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="shinyalert: Easily create pretty popup messages (modals) in Shiny" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="index.html" />
+  <link rel="canonical" href="index.html" />
+  
+  
+  
+  <meta property="og:image" content="https://daattali.com/shiny/img/shinyalert.png" />
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@daattali" />
+  <meta name="twitter:creator" content="@daattali" />
+  <meta name="twitter:title" content="shinyalert: Easily create pretty popup messages (modals) in Shiny" />
+  <meta name="twitter:description" content="A brand new shiny package has entered the world yesterday: shinyalert. It does only one thing, but does it well: show a message to the user in a modal (aka popup, dialog, or alert box). Actually, it can do one more thing: shinyalert can also be used to retrieve an..." />
+  
+  <meta name="twitter:image" content="https://daattali.com/shiny/img/shinyalert.png" />
+    
+  
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../index.html">Dean Attali</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../index.html">Blog</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../shiny/index.html">Shiny</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../projects/index.html">Projects</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="../../aboutme/index.html">About Me / Contact</a>
+
+          </li>
+        
+        
+		
+		
+		<li>
+		  <a href="../../search/index.html" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="../../index.html">
+	      <img class="avatar-img" src="../../img/deanimg.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>shinyalert: Easily create pretty popup messages (modals) in Shiny</h1>
+		  
+		  
+		  
+		    <span class="post-meta">
+                      Posted on February 13, 2018
+                      
+                        | Last updated March 1, 2018
+                       
+                    </span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+  <div id="datacamp-course-section">
+    <strong>Want to improve your Shiny skills?</strong><br/>
+    Try my new interactive online video course: <strong>Shiny Case Studies</strong><br/>
+    <a class="btn btn-primary btn-lg" href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies" target="_blank">
+      Try Course! &nbsp;&raquo;
+    </a>
+  </div>
+
+
+
+      
+        
+        
+        
+      
+        <div id="header-gh-btns">
+          
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=shinyalert&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;repo=shinyalert&amp;type=watch&amp;v=2&amp;count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+                
+            
+              
+                  <iframe src="https://ghbtns.com/github-btn.html?user=daattali&amp;type=follow&amp;count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
+              
+            
+          
+        </div>
+      
+     
+      <article role="main" class="blog-post">
+        
+  
+    <div id="deancarbonads">
+      <script async type="text/javascript" src="http://cdn.carbonads.com/carbon.js?serve=CKYIL5Q7&amp;placement=deanattalicom" id="_carbonads_js"></script>
+    </div>
+  
+
+
+      	<p>A brand new shiny package has entered the world yesterday: <a href="https://github.com/daattali/shinyalert/"><code class="highlighter-rouge">shinyalert</code></a>. It does only one thing, but does it well: show a message to the user in a modal (aka popup, dialog, or alert box). Actually, it can do one more thing: <code class="highlighter-rouge">shinyalert</code> can also be used to retrieve an input value from the user using a modal.</p>
+
+<p>You can visit the <a href="https://github.com/daattali/shinyalert/">GitHub page</a> or check out a demo online for yourself:</p>
+
+<div style="text-align:center;">
+<a class="btn btn-lg btn-success" href="https://daattali.com/shiny/shinyalert-demo/">Check out a demo</a>
+</div>
+
+<p>I usually release packages at version <em>0.1</em>, but with <code class="highlighter-rouge">shinyalert</code> I decided to be optimistic (read: naive) and release version <em>1.0</em>. This package is fairly lightweight and I do not see it growing too much in terms of functionality, and because of its simplicity I don’t expect too many bugs. So I decided to start if off at <em>1.0</em> and my wishful thinking is that it could remain there without much ongoing maintenance. (Update only two weeks later: well, that 1.0 thing didn’t last very long. I’ve already added new features that were requested).</p>
+
+<h1 id="table-of-contents">Table of contents</h1>
+
+<ul>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#input-modals">Input modals</a></li>
+  <li><a href="#return-value">Modal return value</a></li>
+  <li><a href="#callbacks">Callbacks</a></li>
+  <li><a href="#chaining">Chaining modals</a></li>
+  <li><a href="#shiny-comparison">Comparison with Shiny modals</a></li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<p>The idea for this package has been on my mind for a very long time, and the basis for this package is a 10-liner that I wrote 2.5 years ago.</p>
+
+<p>Back in mid 2015, when I was a graduate student spending 15 hours/day building Shiny apps and packages for fun, and maybe 15 minutes/day on my actual thesis (I will forever be grateful to <a href="https://twitter.com/JennyBryan">Jenny Bryan</a> for allowing me to get away with that), <a href="https://twitter.com/timelyportfolio">Kent Russell (@timelyportfolio)</a> built an htmlwidget called <code class="highlighter-rouge">sweetalertR</code>. It’s a port of the <a href="https://github.com/t4t5/sweetalert">sweetalert</a> JavaScript library, which is used to create simple pretty modals, to R.</p>
+
+<p>Shortly after, <a href="https://twitter.com/thercast">Eric Nantz (@theRcast)</a> asked Kent if it’s possible to incorporate these modals in Shiny apps, and tagged me in his question. I’d never heard of sweetalert before, but I was intrigued, so in <a href="https://github.com/timelyportfolio/sweetalertR/issues/1#issuecomment-123564079">my response</a> I came up with a short piece of code to include sweetalert modals in Shiny apps.</p>
+
+<p>Over the next year I noticed that I actually found these modals to be very nice so I started working on this package so that everyone could benefit from them. But it turned out that just a few weeks prior, Shiny released a great new version, which included support for modals! And so my motivation for the package quickly plummeted. I still wanted to release this package because I do believe it’s nicer and simpler than Shiny’s modals, and includes a few extra features. Last week, after a 16-month hiatus, I resumed its development.</p>
+
+<p>And here we are!</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><code class="highlighter-rouge">shinyalert</code> uses the <a href="https://github.com/t4t5/sweetalert">sweetalert</a> JavaScript library to create simple and elegant modals in Shiny. Modals can contain text, images, OK/Cancel buttons, an input to get a response from the user, and many more customizable options. A modal can also have a timer to close automatically.</p>
+
+<p>Simply call <code class="highlighter-rouge">shinyalert()</code> with the desired arguments, such as a title and text, and a modal will show up. In order to be able to call <code class="highlighter-rouge">shinyalert()</code> in a Shiny app, you must first call <code class="highlighter-rouge">useShinyalert()</code> anywhere in the app’s UI.</p>
+
+<p><a href="https://raw.githubusercontent.com/daattali/shinyalert/master/inst/img/shinyalert-basic.gif"><img src="https://raw.githubusercontent.com/daattali/shinyalert/master/inst/img/shinyalert-basic.gif" alt="basic modal" /></a></p>
+
+<p>Here is some minimal Shiny app code that creates the above modal:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">shinyalert</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ui</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fluidPage</span><span class="p">(</span><span class="w">
+  </span><span class="n">useShinyalert</span><span class="p">(),</span><span class="w">  </span><span class="c1"># Set up shinyalert</span><span class="w">
+  </span><span class="n">actionButton</span><span class="p">(</span><span class="s2">"preview"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Preview"</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">server</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">observeEvent</span><span class="p">(</span><span class="n">input</span><span class="o">$</span><span class="n">preview</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1"># Show a modal when the button is pressed</span><span class="w">
+    </span><span class="n">shinyalert</span><span class="p">(</span><span class="s2">"Oops!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Something went wrong."</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"error"</span><span class="p">)</span><span class="w">
+  </span><span class="p">})</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">shinyApp</span><span class="p">(</span><span class="n">ui</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="input-modals">Input modals</h2>
+
+<p>Usually the purpose of a modal is simply informative, to show some information to the user. However, the modal can also be used to retrieve an input from the user by setting the <code class="highlighter-rouge">type = "input"</code> parameter.</p>
+
+<p><a href="https://raw.githubusercontent.com/daattali/shinyalert/master/inst/img/shinyalert-input.gif"><img src="https://raw.githubusercontent.com/daattali/shinyalert/master/inst/img/shinyalert-input.gif" alt="input modal" /></a></p>
+
+<p>Only a single input can be used inside a modal. By default, the input will be a text input, but you can use other HTML input types by specifying the <code class="highlighter-rouge">inputType</code> parameter. For example, <code class="highlighter-rouge">inputType = "number"</code> will provide the user with a numeric input in the modal.</p>
+
+<p>See the <em><a href="#return-value">Modal return value</a></em> and <em><a href="#callbacks">Callbacks</a></em> sections below for information on how to access the value entered by the user.</p>
+
+<h2 id="return-value">Modal return value</h2>
+
+<p>Modals created with <code class="highlighter-rouge">shinyalert</code> have a return value when they exit.</p>
+
+<p>When there is an input field in the modal (<code class="highlighter-rouge">type="input"</code>), the value of the modal is the value the user entered. When there is no input field in the modal, the value of the modal is <code class="highlighter-rouge">TRUE</code> if the user clicked the “OK” button, and <code class="highlighter-rouge">FALSE</code> if the user clicked the “Cancel” button.</p>
+
+<p>When the user exits the modal using the Escape key or by clicking outside of the modal, the return value is <code class="highlighter-rouge">FALSE</code> (as if the “Cancel” button was clicked). If the <code class="highlighter-rouge">timer</code> parameter is used and the modal closes automatically as a result of the timer, no value is returned from the modal.</p>
+
+<p>The return value of the modal can be accessed via <code class="highlighter-rouge">input$shinyalert</code> (or using a different input ID if you specify the <code class="highlighter-rouge">inputId</code> parameter) in the Shiny server’s code, as if it were a regular Shiny input. The return value can also be accessed using the <em><a href="#callbacks">modal callbacks</a></em>.</p>
+
+<h2 id="callbacks">Callbacks</h2>
+
+<p>The return value of the modal is passed as an argument to the <code class="highlighter-rouge">callbackR</code> and <code class="highlighter-rouge">callbackJS</code> functions (if a <code class="highlighter-rouge">callbackR</code> or <code class="highlighter-rouge">callbackJS</code> arguments are provided). These are functions that get called, either in R or in JavaScript, when the modal exits.</p>
+
+<p>For example, using the following <code class="highlighter-rouge">shinyalert</code> code will result in a modal with an input field. After the user clicks “OK”, a hello message will be printed to both the R console and in a native JavaScript alert box. You don’t need to provide both callback functions, but in this example both are used for demonstration.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shinyalert</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"Enter your name"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"input"</span><span class="p">,</span><span class="w">
+  </span><span class="n">callbackR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">message</span><span class="p">(</span><span class="s2">"Hello "</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="n">callbackJS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"function(x) { alert('Hello ' + x); }"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Notice that the <code class="highlighter-rouge">callbackR</code> function accepts R code, while the <code class="highlighter-rouge">callbackJS</code> function uses JavaScript code.</p>
+
+<p>Since closing the modal with the Escape key results in a return value of <code class="highlighter-rouge">FALSE</code>, the callback functions can be modified to not print hello in that case.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shinyalert</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"Enter your name"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"input"</span><span class="p">,</span><span class="w">
+  </span><span class="n">callbackR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="n">message</span><span class="p">(</span><span class="s2">"Hello "</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="n">callbackJS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"function(x) { if (x !== false) { alert('Hello ' + x); } }"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="chaining">Chaining modals</h2>
+
+<p>It’s possible to chain modals (call multiple modals one after another) by making a <code class="highlighter-rouge">shinyalert()</code> call inside a shinyalert callback or using the return value of a previous modal. For example:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shinyalert</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"What is your name?"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"input"</span><span class="p">,</span><span class="w">
+  </span><span class="n">callbackR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">shinyalert</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Welcome"</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">))</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="shiny-comparison">Comparison with Shiny modals</h2>
+
+<p>Doesn’t Shiny already have support for modals?</p>
+
+<p>Yes, it does.</p>
+
+<p>And Shiny’s modals are more powerful in some ways than <code class="highlighter-rouge">shinyalert</code> modals: Shiny’s native modals (<code class="highlighter-rouge">showModal()</code>+<code class="highlighter-rouge">modalDialog()</code>) can contain multiple input fields and even outputs.</p>
+
+<p>I created <code class="highlighter-rouge">shinyalert</code> for two reasons: first of all, I started working on it well before Shiny had modals (or so I thought). But I decided to keep working on it and release it even afterwards because I find <code class="highlighter-rouge">shinyalert</code> to be easier to use and to result in much nicer modals. There are also some extra features in <code class="highlighter-rouge">shinyalert</code>, such as the callback functions and the timer. But ultimately it’s a matter of convenience and aesthetics.</p>
+
+      </article>
+      
+      
+        <div class="blog-tags">
+          Tags:
+          
+            
+              <a href="../../tags/index.html#professional">professional</a>
+            
+              <a href="../../tags/index.html#rstats">rstats</a>
+            
+              <a href="../../tags/index.html#r-bloggers">r-bloggers</a>
+            
+              <a href="../../tags/index.html#packages">packages</a>
+            
+              <a href="../../tags/index.html#shiny">shiny</a>
+            
+          
+        </div>
+      
+
+      
+  <div class="share-section">
+    <h1 class="share-title">Liked what you read?</h1>
+    
+    
+      <div class="share-buttons">
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        <a href="../../contact/index.html" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/shinyalert-package/">
+          Let me know
+        </a>
+        <!--
+        <a href="https://www.facebook.com/dialog/feed?app_id=536330676521989&link=https://deanattali.com/blog/shinyalert-package/&name=shinyalert: Easily create pretty popup messages (modals) in Shiny&caption=deanattali.com&redirect_uri=https://deanattali.com/blog/shinyalert-package/?message=Thanks for sharing!&picture=https://daattali.com/shiny/img/shinyalert.png" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/shinyalert-package/">
+          Share on Facebook
+        </a>
+        -->
+        <a href="https://www.paypal.me/daattali/10" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="/blog/shinyalert-package/">
+          Support me
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://deanattali.com/blog/shinyalert-package/&amp;via=daattali&amp;hashtags=rstats&amp;text=shinyalert:%20Easily%20create%20pretty%20popup%20messages%20(modals)%20in%20Shiny" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/shinyalert-package/">
+          Tweet it
+        </a>
+      </div>
+    
+    
+    
+      <!-- MailChimp Signup Form -->
+      <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-share">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-share">
+      	      <label for="mce-EMAIL-share">Sign up to my Shiny newsletter</label>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-share" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-share" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+
+  </div>
+
+
+      
+      
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="../colourpicker-update-alpha/index.html" data-toggle="tooltip" data-placement="top" title="colourpicker package v1.0: You can now select semi-transparent colours in R (& more!)">&larr; Previous Post</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="../shiny-use-cases-datacamp-course/index.html" data-toggle="tooltip" data-placement="top" title="Shiny Case Studies: My new online interactive video course">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+      
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'deanattali-site';
+	    // ensure that pages with query string or anchor get the same discussion
+            var url_parts = window.location.href.split("?");
+            url_parts = url_parts[0].split("#");
+            disqus_url = url_parts[0];
+            disqus_url = disqus_url.replace(/(\/)*$/, "/"); // make sure the URL ends with one slash
+            disqus_url = disqus_url.replace(/https:\/\//, "http:\/\/"); // make sure new https pages use same comments as old http site
+            
+            // Jekyll 3 caused so many bugs, I'm tired of fixing them one by one properly, so I'll just hack it...
+            // https://github.com/jekyll/jekyll/issues/4483
+            // The projects page now has a trailing slash, it didn't used to
+            if (disqus_url.substr(-9) == "projects/index.html") {
+            	disqus_url = disqus_url.substr(0, disqus_url.length - 1);
+            }
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+      
+      <div id="scroll-box">
+  <div id="scroll-box-close">&times;</div>
+  <div id="scroll-box-hire">
+    Need Shiny help?
+    <a href="../../shiny/index.html">Hire me!</a>
+  </div>
+  <div id="mailchimp-subscribe-section-scrollbox" class="mailchimp-subscribe-section">
+    <div id="mc_embed_signup-scrollbox">
+      <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-scrollbox" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+        <div id="mc_embed_signup_scroll-scrollbox">
+  	      <label for="mce-EMAIL-scrollbox">Sign up to my Shiny newsletter</label>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+  	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-scrollbox" placeholder="Email" required="">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-scrollbox" class="button" title="Sign up to my Shiny newsletter">
+              </div>
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="scroll-box-contact">
+    Questions/comments?
+    <a href="../../contact/index.html">Contact me!</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="../../cdn-cgi/l/email-protection.html#066263676846677272676a6f7263656e2865696b397573646c6365723b4e636a6a69266074696b2662636768677272676a6f2865696b" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://calendly.com/attalitech/meeting" target="_blank" title="Schedule a meeting with me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar-check-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/daattali" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/daattali" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://www.facebook.com/daattali" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/3943160/daattali" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+        
+
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Dean Attali
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+          &nbsp;&bull;&nbsp;
+          <a href="../../cdn-cgi/l/email-protection.html#a4c0c1c5cae4c5d0d0c5c8cdd0c1c7cc8ac7cbc99bd7d1c6cec1c7d099ecc1c8c8cb84c2d6cbc984c0c1c5cac5d0d0c5c8cd8ac7cbc9"><span class="__cf_email__" data-cfemail="e08485818ea0819494818c8994858388ce838f8d">[email&#160;protected]</span></a>
+          
+        </p>
+        
+        <div style="text-align: center; margin: 10px 0 -10px; font-weight: bold;" class="text-muted">
+          <!-- Considering purchasing RStudio Connect, Shiny Server Pro, shinyapps.io, or any other RStudio product? Feel free to contact me to discuss. -->
+          Want to improve your Shiny skills? Try my new interactive, online video course <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny-case-studies">Shiny Case Studies</a>
+        </div>
+
+        <div id="mailchimp-subscribe-section-footer" class="mailchimp-subscribe-section">
+        <div id="mc_embed_signup-footer">
+          <form action="http://deanattali.us14.list-manage.com/subscribe/post?u=a579a88c8f09f9b8502b9d0c3&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-footer" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll-footer">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL-footer" placeholder="Email" required="">
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe-footer" class="button">
+                  </div>
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a579a88c8f09f9b8502b9d0c3_c180f5773c" tabindex="-1" value=""></div>
+            </div>
+          </form>
+        </div>
+        </div>
+
+        <p class="theme-by text-muted">
+          Theme by
+          <a href="../../beautiful-jekyll/index.html">beautiful-jekyll</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+    
+
+
+  
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../js/jquery-1.11.2.min.js"></script>
+  
+	<script src="../../js/bootstrap.min.js"></script>
+  
+	<script src="../../js/js.cookie.js"></script>
+  
+	<script src="../../js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-59820529-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+     
+      <!-- AddThis plugin (floating social media sharing buttons on the left of each post) -->
+      <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57d65a4d97789dd1"></script>
+    
+    
+  </body>
+
+<!-- Mirrored from deanattali.com/blog/shinyalert-package/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Nov 2018 02:19:04 GMT -->
+</html>
